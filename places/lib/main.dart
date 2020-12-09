@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyFirstWidget());
+  
 }
 
 class MyFirstWidget extends StatelessWidget {
   // This widget is the root of your application.
   int counter = 0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,6 +26,10 @@ class MyFirstWidget extends StatelessWidget {
         ],
       )
     );
+
+  }
+  void display() {
+    print(counter);
   }
 }
 
@@ -44,16 +50,25 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
 
       _counter++;
+      print(_counter);
     });
   }
 
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      child: Center(
-        child: Text("Stateful widget $_counter", style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.7)),
-      ),
+    return Column(
+      children: [
+        Container(
+          child: Center(
+            child: Text("Stateful widget", style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.7)),
+          ),
+          
+        ),
+        RaisedButton(
+            onPressed: _incrementCounter,
+        child: Text("Press me"),)
+      ],
     );
 
   }
