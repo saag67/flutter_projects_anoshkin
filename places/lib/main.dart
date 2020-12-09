@@ -7,8 +7,8 @@ void main() {
 
 class MyFirstWidget extends StatelessWidget {
   // This widget is the root of your application.
-  int counter = 0;
-
+  int counter = 0;       //не указан тип final int только для того чтобы можно было запустить проект в эмуляторе
+                          //с его указанием, что правильно, проект крашился, ибо есть попытка изменить значение в виджете Text
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,9 +28,7 @@ class MyFirstWidget extends StatelessWidget {
     );
 
   }
-  void display() {
-    print(counter);
-  }
+
 }
 
 class MyHomePage extends StatefulWidget {
