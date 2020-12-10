@@ -1,39 +1,32 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyFirstWidget());
-  
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: Scaffold(appBar: new AppBar(), body: MyHomePage()),
+  ));
 }
 
 class MyFirstWidget extends StatelessWidget {
   // This widget is the root of your application.
-  int counter = 0;       //не указан тип final int только для того чтобы можно было запустить проект в эмуляторе
-                          //с его указанием, что правильно, проект крашился, ибо есть попытка изменить значение в виджете Text
+  int _statelessCounter = 0;
+  //не указан тип final int только для того чтобы можно было запустить проект в эмуляторе
+  //с его указанием, что правильно, проект крашился, ибо есть попытка изменить значение в виджете Text
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'All are widget',
-
-      home: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            child: Center(
-              child: Text("Hello ${counter++}"),
-            ),
-          ),
-          MyHomePage(title: "Statefull Widget")
-        ],
-      )
+    _statelessCounter++;
+    print("Method stateless build: $_statelessCounter");
+    return Container(
+      //MyHomoPage(title: "Stateful Widget)
+      child: Center(
+        child: Text("Hello"),
+      ),
     );
-
   }
-
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
 
   final String title;
 
@@ -42,32 +35,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _statefulCounter = 0;
 
   void _incrementCounter() {
     setState(() {
-
-      _counter++;
-      print(_counter);
+      _statefulCounter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    _incrementCounter();
+    print("Method stateful build: $_statefulCounter");
 
-    return Column(
-      children: [
-        Container(
-          child: Center(
-            child: Text("Stateful widget", style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 0.7)),
-          ),
-          
-        ),
-        RaisedButton(
-            onPressed: _incrementCounter,
-        child: Text("Press me"),)
-      ],
+    return Container(
+      child: Center(
+        child: Text("Stateful widget"),
+      ),
     );
-
   }
 }
