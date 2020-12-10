@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: Scaffold(appBar: new AppBar(), body: MyHomePage()),
+    home: Scaffold(
+        appBar: new AppBar(),
+        body:
+            MyHomePage()), //Такое решение вынужденное, потому как набор виджетов был ограничен ТЗ,
+    //При подстановке в body: MyFirstWidget() с указанием типа переменной final int _statlessCounter
+    //проект будет крашится при попытке изменить ее значение, при установке типа int виджет будет пересоздаваться
+    //При подстановке виджета MyHomePage() при hotreload будет вызван метод setState, который увеличит значение счетчика,
+    //изменив состояние виджета, не пересоздавая его заново.
   ));
 }
 
