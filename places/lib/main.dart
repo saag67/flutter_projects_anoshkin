@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Scaffold(
-        appBar: new AppBar(),
-        body:
-            MyHomePage()), //Такое решение вынужденное, потому как набор виджетов был ограничен ТЗ,
-    //При подстановке в body: MyFirstWidget() с указанием типа переменной final int _statlessCounter
-    //проект будет крашится при попытке изменить ее значение, при установке типа int виджет будет пересоздаваться
-    //При подстановке виджета MyHomePage() при hotreload будет вызван метод setState, который увеличит значение счетчика,
-    //изменив состояние виджета, не пересоздавая его заново.
-  ));
+  runApp(App());
 }
 
-class MyFirstWidget extends StatelessWidget {
-  // This widget is the root of your application.
-  int _statelessCounter = 0;
-  //не указан тип final int только для того чтобы можно было запустить проект в эмуляторе
-  //с его указанием, что правильно, проект крашился, ибо есть попытка изменить значение в виджете Text
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    _statelessCounter++;
-    print("Method stateless build: $_statelessCounter");
+    return MaterialApp(
+      title: "Fundamential",
+      home: MyFirstWidget(
+          //title: "Fundamential",      //свойство title для Stateful виджета MyHomePage
+          ),
+    );
+  }
+}
+
+class MyFirstWidget extends StatelessWidget with ContextType {
+  @override
+  Widget build(BuildContext context) {
+    if (_context == null) {
+      _context = context;
+    }
+    print(
+        "Stateless Context: ${getContext()}"); //выводим тип полученного элемента в консоль
     return Container(
-      //MyHomoPage(title: "Stateful Widget)
       child: Center(
         child: Text("Hello"),
       ),
@@ -41,24 +41,28 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _statefulCounter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _statefulCounter++;
-    });
-  }
-
+class _MyHomePageState extends State<MyHomePage> with ContextType {
   @override
   Widget build(BuildContext context) {
-    _incrementCounter();
-    print("Method stateful build: $_statefulCounter");
+    if (_context == null) {
+      _context = context;
+    }
+    print(
+        "Context: ${getContext()}"); ////выводим тип полученного элемента в консоль
 
     return Container(
       child: Center(
         child: Text("Stateful widget"),
       ),
     );
+  }
+}
+
+mixin ContextType {
+  //миксин для исключения дублирования кода, не определяя функцию getContext() в каждом классе
+  BuildContext _context;
+  getContext() {
+    //функция для получения типа элемента
+    return _context.runtimeType;
   }
 }
