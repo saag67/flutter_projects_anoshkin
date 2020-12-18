@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/ui/screen/sight_list_screen.dart';
 
 void main() {
   runApp(App());
@@ -8,22 +9,15 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Fundamential",
-      home: MyFirstWidget(
-          //title: "Fundamential",      //свойство title для Stateful виджета MyHomePage
-          ),
+      title: "Places",
+      home: SightListScreen(),
     );
   }
 }
 
-class MyFirstWidget extends StatelessWidget with ContextType {
+class MyFirstWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    if (_context == null) {
-      _context = context;
-    }
-    print(
-        "Stateless Context: ${getContext()}"); //выводим тип полученного элемента в консоль
     return Container(
       child: Center(
         child: Text("Hello"),
@@ -41,28 +35,13 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with ContextType {
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    if (_context == null) {
-      _context = context;
-    }
-    print(
-        "Context: ${getContext()}"); ////выводим тип полученного элемента в консоль
-
     return Container(
       child: Center(
         child: Text("Stateful widget"),
       ),
     );
-  }
-}
-
-mixin ContextType {
-  //миксин для исключения дублирования кода, не определяя функцию getContext() в каждом классе
-  BuildContext _context;
-  getContext() {
-    //функция для получения типа элемента
-    return _context.runtimeType;
   }
 }
