@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class SightListScreen extends StatefulWidget {
+  //класс экрана списка интересных мест
   @override
   _SightListScreenState createState() => _SightListScreenState();
 }
 
 class _SightListScreenState extends State<SightListScreen> {
+  //класс состояния экрана списка интересных мест
   Widget decorateTitle() {
     //функция декорирующа заголовок AppBar
     return RichText(
