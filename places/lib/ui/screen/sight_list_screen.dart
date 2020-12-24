@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:places/domain/sight.dart';
+import 'package:places/styles/text_styles.dart';
+import 'package:places/ui/screen/sight_details.dart';
 
 class SightListScreen extends StatefulWidget {
   //класс экрана списка интересных мест
@@ -7,6 +10,8 @@ class SightListScreen extends StatefulWidget {
 }
 
 class _SightListScreenState extends State<SightListScreen> {
+  Sight sight;
+
   //класс состояния экрана списка интересных мест
   Widget decorateTitle() {
     //функция декорирующа заголовок AppBar
@@ -22,21 +27,15 @@ class _SightListScreenState extends State<SightListScreen> {
         children: [
           TextSpan(
             text: "писок\n",
-            style: TextStyle(
-              color: Colors.black,
-            ),
+            style: textBlack,
           ),
           TextSpan(
             text: "и", //декорируется первая буква строки в желтый цвет
-            style: TextStyle(
-              color: Colors.yellow,
-            ),
+            style: textYellow,
           ),
           TextSpan(
             text: "нтересных мест",
-            style: TextStyle(
-              color: Colors.black,
-            ),
+            style: textBlack,
           )
         ],
       ),
@@ -59,14 +58,18 @@ class _SightListScreenState extends State<SightListScreen> {
           elevation: 0.0, //утановлена высота AppBar в 0, тени не отображаются
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
-        child: Icon(Icons.add),
-      ),
+      body: SightDetails(), //экран галереи карточек
+      //body: SightCard(),//экран карточки
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => {},
+      //   child: Icon(Icons.add),
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.mail), label: "Mail")
+          BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today), label: "Запланировать"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border), label: "В Избранное")
         ],
       ),
     );
