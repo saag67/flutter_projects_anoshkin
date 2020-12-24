@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
+import 'package:places/styles/text_styles.dart';
 
 class SightDetails extends StatelessWidget with Mocks {
   //класс экрана-галереи интересных мест с применением миксина, так проще доступ к объектам типа Sight
@@ -16,21 +18,25 @@ class SightDetails extends StatelessWidget with Mocks {
         children: [
           Container(
               //контейнер для картинки и кнопки
+              decoration: BoxDecoration(
+                color: Colors.grey,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                    bottomLeft: Radius.zero,
+                    bottomRight: Radius.zero),
+              ),
               margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
-              color: Colors.grey,
               height: 150,
               child: Stack(
                 children: [
-                  Text("Image"),
                   Positioned(
                     right: 10,
                     top: 10,
                     child: Container(
                       //контейнер, имитирующий кнопку-сердечко, позиционируется в верхнем правом углу превью
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                      child: Icon(Icons.favorite_border),
+
                       height: 40,
                       width: 40,
                     ),
@@ -39,15 +45,26 @@ class SightDetails extends StatelessWidget with Mocks {
               )),
           Container(
             //контейнер для детальной информации интересного места
+            decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.1),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.zero,
+                topRight: Radius.zero,
+                bottomLeft: Radius.circular(20),
+                bottomRight: Radius.circular(20),
+              ),
+            ),
+
             margin: EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 10),
             padding: EdgeInsets.all(10),
-            color: Colors.lightBlue,
+
             height: 150,
             child: RichText(
                 textAlign: TextAlign.start,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 7,
                 text: TextSpan(
+                  style: textBlack,
                   children: [
                     TextSpan(
                       text: "Наименование: ${sight.name}\n",
@@ -59,10 +76,10 @@ class SightDetails extends StatelessWidget with Mocks {
                       text: "Сайт: ${sight.url}\n",
                     ),
                     TextSpan(
-                      text: "Описание: ${sight.details}\n",
+                      text: "Краткое описание: ${sight.details}\n",
                     ),
                     TextSpan(
-                      text: "Тип: ${sight.type}\n",
+                      text: "Категория: ${sight.type}\n",
                     ),
                   ],
                 )),
