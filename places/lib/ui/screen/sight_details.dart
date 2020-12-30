@@ -4,10 +4,8 @@ import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
 import 'package:places/styles/text_styles.dart';
 
-//класс экрана-галереи интересных мест с применением миксина, так проще доступ к объектам типа Sight
-class SightDetails extends StatelessWidget with Mocks {
-  Sight sight;
-
+///класс экрана-галереи интересных мест
+class SightDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

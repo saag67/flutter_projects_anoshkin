@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:places/styles/text_styles.dart';
 import 'package:places/ui/screen/sight_details.dart';
 
-//класс экрана списка интересных мест
+///класс экрана списка интересных мест
 class SightListScreen extends StatefulWidget {
   @override
   _SightListScreenState createState() => _SightListScreenState();
 }
 
-//класс состояния экрана списка интересных мест
+///класс состояния экрана списка интересных мест
 class _SightListScreenState extends State<SightListScreen> {
   @override
   Widget build(BuildContext context) {

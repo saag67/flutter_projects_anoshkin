@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:places/mocks.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 
 void main() {
   runApp(App());
 }
 
-//класс приложения "Список интересных мест"
-class App extends StatelessWidget with Mocks {
+///класс приложения "Список интересных мест"
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

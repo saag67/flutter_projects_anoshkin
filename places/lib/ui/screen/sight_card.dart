@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:places/domain/sight.dart';
 
-//класс карточки интересного места
+///класс карточки интересного места
 class SightCard extends StatelessWidget {
   final Sight sight;
   SightCard(this.sight);
+
   Widget card() {
     //функция верстки экрана карточки интересного места
     return Container(
@@ -15,7 +16,7 @@ class SightCard extends StatelessWidget {
           Expanded(
             child: Container(
               //контейнер для изображения интересного места
-              //margin: EdgeInsets.all(10),
+
               color: Colors.lightBlue,
             ),
             flex: 2,
@@ -46,17 +47,6 @@ class SightCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                // textAlign: TextAlign.start,
-                // maxLines: 5,
-                // overflow: TextOverflow.ellipsis,
-                // text: TextSpan(
-                //   text: sight.details,
-                //   style: TextStyle(
-                //     fontSize: 20,
-                //     fontWeight: FontWeight.w400,
-                //     color: Colors.black,
-                //   ),
-                // ),
               ),
             ),
           ),
