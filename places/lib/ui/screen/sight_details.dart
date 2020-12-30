@@ -4,11 +4,27 @@ import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
 import 'package:places/styles/text_styles.dart';
 
+//класс экрана-галереи интересных мест с применением миксина, так проще доступ к объектам типа Sight
 class SightDetails extends StatelessWidget with Mocks {
-  //класс экрана-галереи интересных мест с применением миксина, так проще доступ к объектам типа Sight
   Sight sight;
 
-  Widget details(sight) {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          buildDetails(mocks[
+              0]), //вызов функции с отдельным интересным местом в виде параметра
+          buildDetails(mocks[
+              1]), //вызов функции с отдельным интересным местом в виде параметра
+          buildDetails(mocks[
+              2]), //вызов функции с отдельным интересным местом в виде параметра
+        ],
+      ),
+    );
+  }
+
+  Widget buildDetails(Sight sight) {
     return Container(
       //контейнер для одиночного превью
       child: Column(
@@ -17,32 +33,33 @@ class SightDetails extends StatelessWidget with Mocks {
             .stretch, //растягиваем их во весь экран по горизонтали
         children: [
           Container(
-              //контейнер для картинки и кнопки
-              decoration: BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                    bottomLeft: Radius.zero,
-                    bottomRight: Radius.zero),
-              ),
-              margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
-              height: 150,
-              child: Stack(
-                children: [
-                  Positioned(
-                    right: 10,
-                    top: 10,
-                    child: Container(
-                      //контейнер, имитирующий кнопку-сердечко, позиционируется в верхнем правом углу превью
-                      child: Icon(Icons.favorite_border),
+            //контейнер для картинки и кнопки
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                  bottomLeft: Radius.zero,
+                  bottomRight: Radius.zero),
+            ),
+            margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
+            height: 150,
+            child: Stack(
+              children: [
+                Positioned(
+                  right: 10,
+                  top: 10,
+                  child: Container(
+                    //контейнер, имитирующий кнопку-сердечко, позиционируется в верхнем правом углу превью
+                    child: Icon(Icons.favorite_border),
 
-                      height: 40,
-                      width: 40,
-                    ),
+                    height: 40,
+                    width: 40,
                   ),
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
           Container(
             //контейнер для детальной информации интересного места
             decoration: BoxDecoration(
@@ -60,46 +77,22 @@ class SightDetails extends StatelessWidget with Mocks {
 
             height: 150,
             child: RichText(
-                textAlign: TextAlign.start,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 7,
-                text: TextSpan(
-                  style: textBlack,
-                  children: [
-                    TextSpan(
-                      text: "Наименование: ${sight.name}\n",
-                    ),
-                    TextSpan(
-                      text: "Координаты: ${sight.lon}, ${sight.lat}\n",
-                    ),
-                    TextSpan(
-                      text: "Сайт: ${sight.url}\n",
-                    ),
-                    TextSpan(
-                      text: "Краткое описание: ${sight.details}\n",
-                    ),
-                    TextSpan(
-                      text: "Категория: ${sight.type}\n",
-                    ),
-                  ],
-                )),
+              textAlign: TextAlign.start,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 7,
+              text: TextSpan(
+                style: textBlack,
+                children: [
+                  TextSpan(
+                    text: "Категория: ${sight.type}\n",
+                  ),
+                  TextSpan(
+                    text: "Наименование: ${sight.name}\n",
+                  ),
+                ],
+              ),
+            ),
           ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          details(
-              gelendzhik), //вызов функции с отдельным интересным местом в виде параметра
-          details(
-              bora_bora), //вызов функции с отдельным интересным местом в виде параметра
-          details(
-              formentera), //вызов функции с отдельным интересным местом в виде параметра
         ],
       ),
     );
