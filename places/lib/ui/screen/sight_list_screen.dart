@@ -1,13 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:places/styles/text_styles.dart';
+import 'package:places/ui/screen/sight_details.dart';
 
+///класс экрана списка интересных мест
 class SightListScreen extends StatefulWidget {
-  //класс экрана списка интересных мест
   @override
   _SightListScreenState createState() => _SightListScreenState();
 }
 
+///класс состояния экрана списка интересных мест
 class _SightListScreenState extends State<SightListScreen> {
-  //класс состояния экрана списка интересных мест
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(56.0),
+        child: AppBar(
+          title: decorateTitle(),
+          backgroundColor: Colors.white,
+          elevation: 0.0,
+        ),
+      ),
+      body: SightDetails(),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: "Запланировать",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: "В Избранное",
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget decorateTitle() {
     //функция декорирующа заголовок AppBar
     return RichText(
@@ -22,53 +51,21 @@ class _SightListScreenState extends State<SightListScreen> {
         children: [
           TextSpan(
             text: "писок\n",
-            style: TextStyle(
-              color: Colors.black,
-            ),
+            style: textBlack,
           ),
           TextSpan(
             text: "и", //декорируется первая буква строки в желтый цвет
-            style: TextStyle(
-              color: Colors.yellow,
-            ),
+            style: textYellow,
           ),
           TextSpan(
             text: "нтересных мест",
-            style: TextStyle(
-              color: Colors.black,
-            ),
+            style: textBlack,
           )
         ],
       ),
       textAlign: TextAlign.start,
       maxLines: 3,
       overflow: TextOverflow.ellipsis,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(
-            56.0), //установлен максимально возможная высота виджета, ограничение в 56 задано фреймворком
-        child: AppBar(
-          title: decorateTitle(), //функция возвращающая декорированную строку
-          backgroundColor:
-              Colors.white, //установка цвета фона основного окна приложения
-          elevation: 0.0, //утановлена высота AppBar в 0, тени не отображаются
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
-        child: Icon(Icons.add),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.mail), label: "Mail")
-        ],
-      ),
     );
   }
 }

@@ -5,12 +5,14 @@ void main() {
   runApp(App());
 }
 
+///класс приложения "Список интересных мест"
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Places",
       home: SightListScreen(),
+      //home: SightCard(mocks[1]),
     );
   }
 }
