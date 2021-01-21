@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:places/mocks.dart';
 import 'package:places/styles/text_styles.dart';
-import 'package:places/ui/screen/sight_details.dart';
+import 'package:places/ui/screen/sight_card.dart';
 
 ///класс экрана списка интересных мест
 class SightListScreen extends StatefulWidget {
@@ -13,26 +14,17 @@ class _SightListScreenState extends State<SightListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(56.0),
-        child: AppBar(
-          title: decorateTitle(),
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-        ),
+      appBar: MyAppBar(
+        title: decorateTitle(),
       ),
-      body: SightDetails(),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: "Запланировать",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: "В Избранное",
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SightCard(mocks[0]),
+            SightCard(mocks[1]),
+            SightCard(mocks[2]),
+          ],
+        ),
       ),
     );
   }
@@ -45,7 +37,7 @@ class _SightListScreenState extends State<SightListScreen> {
         style: TextStyle(
           color: Colors.lightGreen,
           fontSize:
-              26, //максимально возможный размер шрифта для AppBar, иначе такст наползает на границы виджета
+              24, //максимально возможный размер шрифта для AppBar, иначе такст наползает на границы виджета
           fontWeight: FontWeight.w600,
         ),
         children: [
@@ -68,4 +60,18 @@ class _SightListScreenState extends State<SightListScreen> {
       overflow: TextOverflow.ellipsis,
     );
   }
+}
+
+///класс кастомного виджета, наследника PreferredSize
+class MyAppBar extends PreferredSize {
+  MyAppBar({Key key, Widget title, Color color, int elevation})
+      : super(
+          key: key,
+          preferredSize: Size.fromHeight(56.0),
+          child: AppBar(
+            title: title,
+            backgroundColor: Colors.white,
+            elevation: 0,
+          ),
+        );
 }
