@@ -65,7 +65,7 @@ class _SightDetailsState extends State<SightDetails> {
                       text: "${widget.sight.name}\n",
                     ),
                     TextSpan(
-                      text: """${widget.sight.details}""",
+                      text: "${widget.sight.details}",
                     ),
                   ],
                 ),
@@ -100,9 +100,13 @@ class _SightDetailsState extends State<SightDetails> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today), label: "Запланировать"),
+            icon: Icon(Icons.calendar_today),
+            label: to_schedule,
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border), label: "Добавить в Избранное"),
+            icon: Icon(Icons.favorite_border),
+            label: add_to_favourites,
+          ),
         ],
       ),
     );
