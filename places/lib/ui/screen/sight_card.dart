@@ -21,6 +21,25 @@ class SightCard extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.lightBlue,
                 borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: const Offset(2.0, 2.0),
+                    blurRadius: 3.0,
+                    spreadRadius: 2.0,
+                  ),
+                ],
+              ),
+              child: Image.network(
+                sight.url,
+                loadingBuilder: (context, child, progress) {
+                  return progress == null
+                      ? child
+                      : Center(
+                          child: RefreshProgressIndicator(),
+                        );
+                },
+                fit: BoxFit.fill,
               ),
             ),
             Positioned(
@@ -31,7 +50,15 @@ class SightCard extends StatelessWidget {
                 margin:
                     EdgeInsets.only(left: 10, top: 0.0, right: 10, bottom: 0.0),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      offset: const Offset(2.0, 2.0),
+                      blurRadius: 3.0,
+                      spreadRadius: 2.0,
+                    ),
+                  ],
+                  color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.zero,
                     topRight: Radius.zero,
