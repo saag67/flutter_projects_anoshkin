@@ -1,95 +1,111 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:places/domain/sight.dart';
-import 'package:places/mocks.dart';
-import 'package:places/styles/text_styles.dart';
+import 'package:places/res/strings/strings.dart';
 
-///класс экрана-галереи интересных мест
-class SightDetails extends StatelessWidget {
+///класс экрана-детализации интересного места
+class SightDetails extends StatefulWidget {
+  Sight sight;
+  SightDetails(this.sight);
+
+  @override
+  _SightDetailsState createState() => _SightDetailsState();
+}
+
+class _SightDetailsState extends State<SightDetails> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          buildDetails(mocks[
-              0]), //вызов функции с отдельным интересным местом в виде параметра
-          buildDetails(mocks[
-              1]), //вызов функции с отдельным интересным местом в виде параметра
-          buildDetails(mocks[
-              2]), //вызов функции с отдельным интересным местом в виде параметра
-        ],
-      ),
-    );
-  }
-
-  Widget buildDetails(Sight sight) {
-    return Container(
-      //контейнер для одиночного превью
-      child: Column(
-        //выстраиваем контейнеры по вертикали
-        crossAxisAlignment: CrossAxisAlignment
-            .stretch, //растягиваем их во весь экран по горизонтали
-        children: [
-          Container(
-            //контейнер для картинки и кнопки
+    double height1 = MediaQuery.of(context).size.height;
+    double width1 = MediaQuery.of(context).size.width;
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Container(
+            width: 30,
+            height: 30,
             decoration: BoxDecoration(
-              color: Colors.grey,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.zero,
-                  bottomRight: Radius.zero),
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
             ),
-            margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
-            height: 150,
-            child: Stack(
-              children: [
-                Positioned(
-                  right: 10,
-                  top: 10,
-                  child: Container(
-                    //контейнер, имитирующий кнопку-сердечко, позиционируется в верхнем правом углу превью
-                    child: Icon(Icons.favorite_border),
-
-                    height: 40,
-                    width: 40,
+            child: Icon(Icons.arrow_back_ios_outlined),
+          ),
+          onPressed: () {},
+          color: Colors.black,
+        ),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+              width: width1,
+              height: height1 / 2,
+              color: Colors.lightBlue,
+              child: Center(
+                child: Text("Image box"),
+              ),
+            ),
+            Container(
+              child: RichText(
+                textAlign: TextAlign.start,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 5,
+                text: TextSpan(
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: "${widget.sight.type}\n",
+                    ),
+                    TextSpan(
+                      text: "${widget.sight.name}\n",
+                    ),
+                    TextSpan(
+                      text: "${widget.sight.details}",
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
+                margin: EdgeInsets.all(20),
+                padding: EdgeInsets.all(15),
+                width: width1,
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                      text: create_route,
+                    ),
                   ),
                 ),
-              ],
+              ),
             ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today),
+            label: to_schedule,
           ),
-          Container(
-            //контейнер для детальной информации интересного места
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.zero,
-                topRight: Radius.zero,
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
-            ),
-
-            margin: EdgeInsets.only(left: 10, top: 0, right: 10, bottom: 10),
-            padding: EdgeInsets.all(10),
-
-            height: 150,
-            child: RichText(
-              textAlign: TextAlign.start,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 7,
-              text: TextSpan(
-                style: textBlack,
-                children: [
-                  TextSpan(
-                    text: "Категория: ${sight.type}\n",
-                  ),
-                  TextSpan(
-                    text: "Наименование: ${sight.name}\n",
-                  ),
-                ],
-              ),
-            ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite_border),
+            label: add_to_favourites,
           ),
         ],
       ),

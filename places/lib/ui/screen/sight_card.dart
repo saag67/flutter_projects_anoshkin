@@ -1,80 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/res/strings/strings.dart';
 
 ///класс карточки интересного места
 class SightCard extends StatelessWidget {
   final Sight sight;
+
   SightCard(this.sight);
 
-  Widget card() {
-    //функция верстки экрана карточки интересного места
-    return Container(
-      color: Colors.white,
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
-              //контейнер для изображения интересного места
-
-              color: Colors.lightBlue,
+  @override
+  Widget build(BuildContext context) {
+    double width2 = MediaQuery.of(context).size.width / 2;
+    return AspectRatio(
+        aspectRatio: 1.5,
+        child: Stack(
+          children: [
+            Container(
+              margin: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.lightBlue,
+                borderRadius: BorderRadius.circular(20),
+              ),
             ),
-            flex: 2,
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              //контейнер для описания интересного места
-              padding: EdgeInsets.all(10),
-              child: RichText(
-                textAlign: TextAlign.start,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 5,
-                text: TextSpan(
-                  style: TextStyle(
-                    fontSize: 26,
-                    color: Colors.grey,
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                margin:
+                    EdgeInsets.only(left: 10, top: 0.0, right: 10, bottom: 0.0),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.9),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.zero,
+                    topRight: Radius.zero,
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   ),
+                ),
+                width: 200,
+                height: 120,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    TextSpan(
-                      text: "${sight.type}:\n",
+                    SizedBox(
+                      height: 10,
                     ),
-                    TextSpan(
-                      text: "${sight.name}\n",
-                    ),
-                    TextSpan(
-                      text: "${sight.details}\n",
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      alignment: Alignment.topLeft,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minWidth: 50,
+                          maxWidth: width2,
+                        ),
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            text: sight.name,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-          ),
-          Container(
-            //контейнер-кнопка для построения маршрута к интересному месту
-            margin: EdgeInsets.all(20),
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Center(
-              child: Text(
-                "построить маршрут",
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
+            Positioned(
+              right: 20,
+              top: 20,
+              child: Container(
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.favorite_border,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return card();
+            Positioned(
+              left: 20,
+              top: 20,
+              child: Container(
+                child: RichText(
+                  text: TextSpan(
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      text: category),
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
