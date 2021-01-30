@@ -5,7 +5,7 @@ import 'package:places/res/strings/strings.dart';
 
 ///класс экрана-детализации интересного места
 class SightDetails extends StatefulWidget {
-  Sight sight;
+  final Sight sight;
   SightDetails(this.sight);
 
   @override
@@ -43,8 +43,16 @@ class _SightDetailsState extends State<SightDetails> {
               width: width1,
               height: height1 / 2,
               color: Colors.lightBlue,
-              child: Center(
-                child: Text("Image box"),
+              child: Image.network(
+                widget.sight.url,
+                loadingBuilder: (context, child, progress) {
+                  return progress == null
+                      ? child
+                      : Center(
+                          child: RefreshProgressIndicator(),
+                        );
+                },
+                fit: BoxFit.fill,
               ),
             ),
             Container(

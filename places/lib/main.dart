@@ -12,7 +12,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Places",
-      home: SightListScreen(),
+      home: SightListScreen(), //SightDetails(mocks[1]),
     );
   }
 }
