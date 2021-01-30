@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/mocks.dart';
+import 'package:places/res/strings/strings.dart';
 import 'package:places/styles/text_styles.dart';
 import 'package:places/ui/screen/sight_card.dart';
 
@@ -26,38 +27,19 @@ class _SightListScreenState extends State<SightListScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget decorateTitle() {
-    //функция декорирующа заголовок AppBar
-    return RichText(
-      text: TextSpan(
-        text: "C", //декорируется первая буква строки в зеленый цвет
-        style: TextStyle(
-          color: Colors.lightGreen,
-          fontSize:
-              24, //максимально возможный размер шрифта для AppBar, иначе такст наползает на границы виджета
-          fontWeight: FontWeight.w600,
-        ),
-        children: [
-          TextSpan(
-            text: "писок\n",
-            style: textBlack,
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 1,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_tree_outlined),
+            label: list_interesting_sights,
           ),
-          TextSpan(
-            text: "и", //декорируется первая буква строки в желтый цвет
-            style: textYellow,
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_to_photos_outlined),
+            label: visited_sights,
           ),
-          TextSpan(
-            text: "нтересных мест",
-            style: textBlack,
-          )
         ],
       ),
-      textAlign: TextAlign.start,
-      maxLines: 3,
-      overflow: TextOverflow.ellipsis,
     );
   }
 }
