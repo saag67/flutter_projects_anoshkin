@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:places/mocks.dart';
-import 'package:places/res/strings/strings.dart';
 import 'package:places/styles/text_styles.dart';
 import 'package:places/ui/screen/sight_card.dart';
 
@@ -27,19 +26,7 @@ class _SightListScreenState extends State<SightListScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_tree_outlined),
-            label: list_interesting_sights,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_to_photos_outlined),
-            label: visited_sights,
-          ),
-        ],
-      ),
+      bottomNavigationBar: btmNavigationBat(),
     );
   }
 }
@@ -56,4 +43,62 @@ class MyAppBar extends PreferredSize {
             elevation: 0,
           ),
         );
+}
+
+Widget decorateTitle() {
+  //функция декорирующа заголовок AppBar
+  return RichText(
+    text: TextSpan(
+      text: "C", //декорируется первая буква строки в зеленый цвет
+      style: TextStyle(
+        color: Colors.lightGreen,
+        fontSize:
+            24, //максимально возможный размер шрифта для AppBar, иначе такст наползает на границы виджета
+        fontWeight: FontWeight.w600,
+      ),
+      children: [
+        TextSpan(
+          text: "писок\n",
+          style: textBlack,
+        ),
+        TextSpan(
+          text: "и", //декорируется первая буква строки в желтый цвет
+          style: textYellow,
+        ),
+        TextSpan(
+          text: "нтересных мест",
+          style: textBlack,
+        )
+      ],
+    ),
+    textAlign: TextAlign.start,
+    maxLines: 3,
+    overflow: TextOverflow.ellipsis,
+  );
+}
+
+///единый виджет меню BottomNavigationBar для экранов SightListScreen и VisitingScreen
+Widget btmNavigationBat() {
+  return BottomNavigationBar(
+    currentIndex: 0,
+    type: BottomNavigationBarType.fixed,
+    items: [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.list),
+        label: '',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.map_outlined),
+        label: '',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.favorite),
+        label: '',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.settings),
+        label: '',
+      ),
+    ],
+  );
 }

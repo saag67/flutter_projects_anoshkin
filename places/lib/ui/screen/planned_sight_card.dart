@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:places/domain/sight.dart';
 
-///класс карточки интересного места
-class SightCard extends StatelessWidget {
+///класс виджета-карточки планируемых к посещению мест
+class PlannedSightCard extends StatelessWidget {
   final Sight sight;
-
-  //Widget place1;
-
-  SightCard(this.sight);
+  PlannedSightCard(this.sight);
 
   @override
   Widget build(BuildContext context) {
@@ -87,9 +83,23 @@ class SightCard extends StatelessWidget {
             right: 20,
             top: 20,
             child: Container(
-              child: Icon(
-                Icons.favorite_border,
-                color: Colors.white,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.calendar_today,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.cancel,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
