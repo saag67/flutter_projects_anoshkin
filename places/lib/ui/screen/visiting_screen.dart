@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:places/mocks.dart';
+import 'package:places/res/colors/colors.dart';
 import 'package:places/res/strings/strings.dart';
 import 'package:places/ui/screen/planned_sight_card.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
@@ -94,8 +95,8 @@ class CustomTabIndicator extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: tabController.index == i
-                    ? Colors.indigo[900]
-                    : Colors.grey[300],
+                    ? selectedColorTabIndicator
+                    : unselectedColorTabIndicator,
                 borderRadius: BorderRadius.circular(40),
               ),
               padding: EdgeInsets.all(10),

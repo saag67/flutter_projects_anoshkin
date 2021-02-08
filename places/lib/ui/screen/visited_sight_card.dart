@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 
+///класс виджета-карточки посещенного места
 class VisitedSightCard extends StatelessWidget {
   final Sight sight;
 

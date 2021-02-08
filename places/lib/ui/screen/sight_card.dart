@@ -6,8 +6,6 @@ import 'package:places/domain/sight.dart';
 class SightCard extends StatelessWidget {
   final Sight sight;
 
-  //Widget place1;
-
   SightCard(this.sight);
 
   @override
