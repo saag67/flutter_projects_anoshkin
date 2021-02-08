@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:places/domain/sight.dart';
 
-///класс карточки интересного места
-class SightCard extends StatelessWidget {
+///класс виджета-карточки посещенного места
+class VisitedSightCard extends StatelessWidget {
   final Sight sight;
 
-  SightCard(this.sight);
-
+  VisitedSightCard(this.sight);
   @override
   Widget build(BuildContext context) {
     double width2 = MediaQuery.of(context).size.width / 2;
@@ -85,9 +83,23 @@ class SightCard extends StatelessWidget {
             right: 20,
             top: 20,
             child: Container(
-              child: Icon(
-                Icons.favorite_border,
-                color: Colors.white,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.share,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Icon(
+                      Icons.cancel,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
