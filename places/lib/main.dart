@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/res/screens/themes.dart';
 import 'package:places/ui/screen/visiting_screen.dart';
 
 void main() {
@@ -7,13 +8,17 @@ void main() {
 
 ///класс приложения "Список интересных мест"
 class App extends StatelessWidget {
+  //статическая переменная для переключения тем,
+  // темы переключаются путем изменения значения и перезагрузки эмулятора
+  static bool isDarkTheme = false;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Places",
-        home: VisitingScreen() //SightListScreen(), //SightDetails(mocks[1]),
-        );
+      debugShowCheckedModeBanner: false,
+      theme: isDarkTheme ? darkTheme : lightTheme,
+      title: "Places",
+      home: VisitingScreen(),
+    );
   }
 }
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:places/main.dart';
 import 'package:places/mocks.dart';
 import 'package:places/res/colors/colors.dart';
 import 'package:places/res/strings/strings.dart';
+import 'package:places/res/styles/styles.dart';
 import 'package:places/ui/screen/planned_sight_card.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 import 'package:places/ui/screen/visited_sight_card.dart';
@@ -32,16 +34,15 @@ class _VisitingScreenState extends State<VisitingScreen>
       initialIndex: 0,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          //backgroundColor: Colors.white,
           elevation: 0,
           title: Center(
             child: RichText(
               text: TextSpan(
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
-                  ),
+                  style: App.isDarkTheme
+                      ? matHeadline6
+                      : matHeadline6Black, //TextStyle(
+
                   text: favorite),
             ),
           ),
@@ -73,7 +74,7 @@ class _VisitingScreenState extends State<VisitingScreen>
             ),
           ],
         ),
-        bottomNavigationBar: btmNavigationBat(),
+        bottomNavigationBar: NavigationBar(),
       ),
     );
   }
