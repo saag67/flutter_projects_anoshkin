@@ -16,4 +16,5 @@ const Color dmPrimaryColor = Color(0xFF1D1D1D),
     dmBackgroundColor = Color(0xFF21222C),
     dmBottomBarSelectedColor = Colors.white,
     dmBottomBarUnselectedColor = dmPrimaryColorLight,
-    dmCardBackgroundColor = Color(0xFF1A1A20);
+    dmCardBackgroundColor = Color(0xFF1A1A20),
+    dmSecondaryBlack = Color(0xFF7C7E92);

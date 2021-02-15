@@ -24,5 +24,8 @@ final darkTheme = ThemeData(
   ),
   textTheme: TextTheme(
     headline6: matHeadline6,
+    headline5: matHeadline5,
+    subtitle2: matSubtitle2,
+    subtitle1: matSubtitle2light,
   ),
 );

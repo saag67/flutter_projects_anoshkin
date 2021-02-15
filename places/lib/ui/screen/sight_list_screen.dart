@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/main.dart';
 import 'package:places/mocks.dart';
-import 'package:places/res/strings/strings.dart';
 import 'package:places/res/styles/styles.dart';
 import 'package:places/ui/screen/sight_card.dart';
 
@@ -19,8 +18,30 @@ class _SightListScreenState extends State<SightListScreen> {
       appBar: MyAppBar(
         title: RichText(
           text: TextSpan(
-            text: list_interesting_sights,
+            text: "",
             style: App.isDarkTheme ? matHeadline6 : matHeadline6Black,
+            children: [
+              TextSpan(
+                text: "C",
+                style: TextStyle(
+                  fontSize: 26,
+                  color: Colors.lightGreen,
+                ),
+              ),
+              TextSpan(
+                text: "писок\n",
+              ),
+              TextSpan(
+                text: "и",
+                style: TextStyle(
+                  color: Colors.yellow,
+                  fontSize: 26,
+                ),
+              ),
+              TextSpan(
+                text: "нтересных мест",
+              ),
+            ],
           ),
           textAlign: TextAlign.start,
           maxLines: 3,

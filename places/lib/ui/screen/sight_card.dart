@@ -23,16 +23,19 @@ class SightCard extends StatelessWidget {
               color: Colors.lightBlue,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Image.network(
-              sight.url,
-              loadingBuilder: (context, child, progress) {
-                return progress == null
-                    ? child
-                    : Center(
-                        child: RefreshProgressIndicator(),
-                      );
-              },
-              fit: BoxFit.fill,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                sight.url,
+                loadingBuilder: (context, child, progress) {
+                  return progress == null
+                      ? child
+                      : Center(
+                          child: RefreshProgressIndicator(),
+                        );
+                },
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           Positioned(
