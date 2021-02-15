@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/main.dart';
+import 'package:places/res/colors/colors.dart';
 
 ///класс виджета-карточки планируемых к посещению мест
 class PlannedSightCard extends StatelessWidget {
   final Sight sight;
+
   PlannedSightCard(this.sight);
 
   @override
@@ -19,16 +22,19 @@ class PlannedSightCard extends StatelessWidget {
               color: Colors.lightBlue,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Image.network(
-              sight.url,
-              loadingBuilder: (context, child, progress) {
-                return progress == null
-                    ? child
-                    : Center(
-                        child: RefreshProgressIndicator(),
-                      );
-              },
-              fit: BoxFit.fill,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                sight.url,
+                loadingBuilder: (context, child, progress) {
+                  return progress == null
+                      ? child
+                      : Center(
+                          child: RefreshProgressIndicator(),
+                        );
+                },
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           Positioned(
@@ -43,7 +49,9 @@ class PlannedSightCard extends StatelessWidget {
                 bottom: 0.0,
               ),
               decoration: BoxDecoration(
-                color: Colors.grey[100],
+                color: App.isDarkTheme
+                    ? dmCardBackgroundColor
+                    : lmCardBackgroundColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.zero,
                   topRight: Radius.zero,
@@ -70,7 +78,9 @@ class PlannedSightCard extends StatelessWidget {
                       child: RichText(
                         text: TextSpan(
                           style: TextStyle(
-                            color: Colors.black,
+                            color: App.isDarkTheme
+                                ? lmCardBackgroundColor
+                                : dmCardBackgroundColor,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),

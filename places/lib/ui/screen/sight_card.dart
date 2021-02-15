@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/main.dart';
+import 'package:places/res/colors/colors.dart';
 
 ///класс карточки интересного места
 class SightCard extends StatelessWidget {
@@ -21,16 +23,19 @@ class SightCard extends StatelessWidget {
               color: Colors.lightBlue,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Image.network(
-              sight.url,
-              loadingBuilder: (context, child, progress) {
-                return progress == null
-                    ? child
-                    : Center(
-                        child: RefreshProgressIndicator(),
-                      );
-              },
-              fit: BoxFit.fill,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                sight.url,
+                loadingBuilder: (context, child, progress) {
+                  return progress == null
+                      ? child
+                      : Center(
+                          child: RefreshProgressIndicator(),
+                        );
+                },
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           Positioned(
@@ -41,7 +46,9 @@ class SightCard extends StatelessWidget {
               margin:
                   EdgeInsets.only(left: 10, top: 0.0, right: 10, bottom: 0.0),
               decoration: BoxDecoration(
-                color: Colors.grey[100],
+                color: App.isDarkTheme
+                    ? dmCardBackgroundColor
+                    : lmCardBackgroundColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.zero,
                   topRight: Radius.zero,
@@ -68,7 +75,9 @@ class SightCard extends StatelessWidget {
                       child: RichText(
                         text: TextSpan(
                           style: TextStyle(
-                            color: Colors.black,
+                            color: App.isDarkTheme
+                                ? lmCardBackgroundColor
+                                : dmCardBackgroundColor,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
