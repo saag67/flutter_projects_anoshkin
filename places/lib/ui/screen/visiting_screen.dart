@@ -6,7 +6,6 @@ import 'package:places/res/colors/colors.dart';
 import 'package:places/res/strings/strings.dart';
 import 'package:places/res/styles/styles.dart';
 import 'package:places/ui/screen/planned_sight_card.dart';
-import 'package:places/ui/screen/sight_list_screen.dart';
 import 'package:places/ui/screen/visited_sight_card.dart';
 
 ///класс экрана планируемых к посещению/посещенных мест
@@ -74,7 +73,7 @@ class _VisitingScreenState extends State<VisitingScreen>
             ),
           ],
         ),
-        bottomNavigationBar: NavigationBar(),
+        // bottomNavigationBar: NavigationBar(),
       ),
     );
   }

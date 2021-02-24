@@ -8,7 +8,10 @@ const Color lmPrimaryColor = Colors.white,
     lmPrimaryColorDark = Color(0xFFF5F5F5),
     lmCardBackgroundColor = lmPrimaryColorDark,
     lmBottomBarSelectedColor = dmPrimaryColorDark,
-    lmBottomBarUnselectedColor = dmPrimaryColor;
+    lmBottomBarUnselectedColor = dmPrimaryColor,
+    lmSettingScreenAppBarButton = Color(0xFF4CAF50),
+    lmSettingsScreenBodyCategory = Color(0x8F7C7E92),
+    lmCheckBoxFill = Color(0xFF252849);
 
 const Color dmPrimaryColor = Color(0xFF1D1D1D),
     dmPrimaryColorDark = Color(0x88000000),

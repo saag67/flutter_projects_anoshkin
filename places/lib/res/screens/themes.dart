@@ -12,6 +12,11 @@ final lightTheme = ThemeData(
     selectedItemColor: lmBottomBarSelectedColor,
     unselectedItemColor: lmBottomBarUnselectedColor,
   ),
+  sliderTheme: SliderThemeData(
+    activeTrackColor: lmSettingScreenAppBarButton,
+    thumbColor: lmPrimaryColorDark,
+    inactiveTrackColor: lmSettingsScreenBodyCategory,
+  ),
 );
 final darkTheme = ThemeData(
   primaryColor: dmPrimaryColor,
@@ -23,9 +28,14 @@ final darkTheme = ThemeData(
     unselectedItemColor: dmBottomBarUnselectedColor,
   ),
   textTheme: TextTheme(
-    headline6: matHeadline6,
-    headline5: matHeadline5,
-    subtitle2: matSubtitle2,
-    subtitle1: matSubtitle2light,
-  ),
+      headline6: matHeadline6,
+      headline5: matHeadline5,
+      subtitle2: matSubtitle2,
+      subtitle1: matSubtitle2light,
+      headline4: matSettingsScreenHeader,
+      bodyText2: matSettingsScreenBody,
+      bodyText1: matSettingsScreenBodyCategory,
+      button: matSettingsScreenAppBarGreen,
+      caption: matSettingsScreenBodyCategoryItemBlack),
+  toggleableActiveColor: lmPrimaryColorDark,
 );

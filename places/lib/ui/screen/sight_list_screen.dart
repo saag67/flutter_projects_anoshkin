@@ -57,14 +57,35 @@ class _SightListScreenState extends State<SightListScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBar(),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: 0,
+      //   type: BottomNavigationBarType.fixed,
+      //   items: [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.list),
+      //       label: '',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.map_outlined),
+      //       label: '',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.favorite),
+      //       label: '',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.settings),
+      //       label: '',
+      //     ),
+      //   ],
+      // ),
     );
   }
 }
 
 ///класс кастомного виджета, наследника PreferredSize
 class MyAppBar extends PreferredSize {
-  MyAppBar({Key key, Widget title, Color color, int elevation})
+  MyAppBar({Key key, Widget leading, Widget title, Color color, int elevation})
       : super(
           key: key,
           preferredSize: Size.fromHeight(56.0),
