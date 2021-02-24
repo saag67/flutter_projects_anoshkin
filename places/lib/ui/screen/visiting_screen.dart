@@ -46,9 +46,75 @@ class _VisitingScreenState extends State<VisitingScreen>
             ),
           ),
           bottom: PreferredSize(
-            child: CustomTabIndicator(
-              tabController: tabController,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      tabController.index == 0
+                          ? tabController.index = 1
+                          : tabController.index = 0;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: tabController.index == 0
+                          ? selectedColorTabIndicator
+                          : unselectedColorTabIndicator,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    padding: EdgeInsets.all(10),
+                    width: 170,
+                    height: 40,
+                    child: Align(
+                      child: Text(
+                        planned_visit,
+                        style: TextStyle(
+                          color: tabController.index == 0
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      tabController.index == 1
+                          ? tabController.index = 0
+                          : tabController.index = 1;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: tabController.index == 1
+                          ? selectedColorTabIndicator
+                          : unselectedColorTabIndicator,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    padding: EdgeInsets.all(10),
+                    width: 170,
+                    height: 40,
+                    child: Align(
+                      child: Text(
+                        visited_sight,
+                        style: TextStyle(
+                          color: tabController.index == 1
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
+            //CustomTabIndicator(
+            //   tabController: tabController,
+            // ),
+
             preferredSize: Size.fromHeight(48),
           ),
         ),

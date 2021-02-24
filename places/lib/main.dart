@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/res/screens/themes.dart';
-import 'package:places/ui/screen/filters_screen.dart';
+import 'package:places/ui/screen/home_page_screen.dart';
 
 void main() => runApp(App());
 
@@ -28,7 +28,7 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         theme: App.isDarkTheme ? darkTheme : lightTheme,
         title: "Places",
-        home: FiltersScreen(),
+        home: HomePage(),
       );
     });
   }
