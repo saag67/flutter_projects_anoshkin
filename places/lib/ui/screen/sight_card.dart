@@ -10,9 +10,26 @@ class SightCard extends StatelessWidget {
 
   SightCard(this.sight);
 
+  Widget buttonBar() {
+    return ButtonBar(
+      children: [
+        IconButton(
+          icon: Icon(
+            Icons.favorite_border,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            print("Added to Favorites");
+          },
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double width2 = MediaQuery.of(context).size.width / 2;
+
     return AspectRatio(
       aspectRatio: 1.5,
       child: Stack(
@@ -90,19 +107,22 @@ class SightCard extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            right: 20,
-            top: 20,
-            child: Container(
-              child: Icon(
-                Icons.favorite_border,
-                color: Colors.white,
-              ),
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: () {
+                print("Taped");
+              },
             ),
           ),
           Positioned(
+            right: 20,
+            top: 10,
+            child: buttonBar(),
+          ),
+          Positioned(
             left: 20,
-            top: 20,
+            top: 30,
             child: Container(
               child: RichText(
                 text: TextSpan(

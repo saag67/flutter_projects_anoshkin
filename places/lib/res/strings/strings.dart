@@ -1,5 +1,5 @@
 ///строковый ресурс для приложения
-String category = 'категория';
+String category = 'КАТЕГОРИИ';
 String create_route = 'построить маршрут';
 String to_schedule = "Запланировать";
 String add_to_favourites = "Добавить в Избранное";
@@ -7,3 +7,18 @@ String list_interesting_sights = "Список\nинтересных мест";
 String planned_visit = "Хочу посетить";
 String visited_sight = "Посетил";
 String favorite = "Избранное";
+String settings = "Настройки";
+String dark_theme = "Темная тема";
+String man_tutorial = "Смотреть туториал";
+String show = "Показать";
+String clear_all = "Очистить";
+String hotel = "Отель";
+String restaurant = "Ресторан";
+String special_place = "Особое место";
+String park = "Парк";
+String museum = "Музей";
+String cafe = "Кафе";
+String distance = "Расстояние";
+String from = "от";
+String to = "до";
+String km = "км";

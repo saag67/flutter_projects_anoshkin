@@ -6,7 +6,6 @@ import 'package:places/res/colors/colors.dart';
 import 'package:places/res/strings/strings.dart';
 import 'package:places/res/styles/styles.dart';
 import 'package:places/ui/screen/planned_sight_card.dart';
-import 'package:places/ui/screen/sight_list_screen.dart';
 import 'package:places/ui/screen/visited_sight_card.dart';
 
 ///класс экрана планируемых к посещению/посещенных мест
@@ -47,9 +46,75 @@ class _VisitingScreenState extends State<VisitingScreen>
             ),
           ),
           bottom: PreferredSize(
-            child: CustomTabIndicator(
-              tabController: tabController,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      tabController.index == 0
+                          ? tabController.index = 1
+                          : tabController.index = 0;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: tabController.index == 0
+                          ? selectedColorTabIndicator
+                          : unselectedColorTabIndicator,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    padding: EdgeInsets.all(10),
+                    width: 170,
+                    height: 40,
+                    child: Align(
+                      child: Text(
+                        planned_visit,
+                        style: TextStyle(
+                          color: tabController.index == 0
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      tabController.index == 1
+                          ? tabController.index = 0
+                          : tabController.index = 1;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: tabController.index == 1
+                          ? selectedColorTabIndicator
+                          : unselectedColorTabIndicator,
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    padding: EdgeInsets.all(10),
+                    width: 170,
+                    height: 40,
+                    child: Align(
+                      child: Text(
+                        visited_sight,
+                        style: TextStyle(
+                          color: tabController.index == 1
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
+            //CustomTabIndicator(
+            //   tabController: tabController,
+            // ),
+
             preferredSize: Size.fromHeight(48),
           ),
         ),
@@ -74,59 +139,8 @@ class _VisitingScreenState extends State<VisitingScreen>
             ),
           ],
         ),
-        bottomNavigationBar: NavigationBar(),
+        // bottomNavigationBar: NavigationBar(),
       ),
-    );
-  }
-}
-
-///класс виджета кастомного таб-индикатора
-class CustomTabIndicator extends StatelessWidget {
-  TabController tabController;
-
-  CustomTabIndicator({Key key, this.tabController}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        for (int i = 0; i < 2; i++)
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: tabController.index == i
-                    ? selectedColorTabIndicator
-                    : unselectedColorTabIndicator,
-                borderRadius: BorderRadius.circular(40),
-              ),
-              padding: EdgeInsets.all(10),
-              width: 170,
-              height: 40,
-              child: i == 0
-                  ? Align(
-                      child: Text(
-                        planned_visit,
-                        style: TextStyle(
-                          color: tabController.index == i
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                      ),
-                    )
-                  : Align(
-                      child: Text(
-                        visited_sight,
-                        style: TextStyle(
-                          color: tabController.index == i
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                      ),
-                    ),
-            ),
-          ),
-      ],
     );
   }
 }

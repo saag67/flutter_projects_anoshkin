@@ -41,7 +41,57 @@ TextStyle matSubtitle2 = _text.copyWith(
   color: dmSecondaryBlack,
 );
 
+TextStyle matSubtitleShow = _text.copyWith(
+  fontWeight: FontWeight.w700,
+  fontSize: 14,
+);
+
 TextStyle matSubtitle2light = _text.copyWith(
   fontWeight: FontWeight.w400,
   fontSize: 14,
+);
+
+TextStyle matSettingsScreenHeader = _text.copyWith(
+  fontSize: 24,
+  fontWeight: FontWeight.w500,
+);
+
+TextStyle matSettingsScreenHeaderBlack = _text.copyWith(
+  fontSize: 24,
+  fontWeight: FontWeight.w500,
+  color: dmPrimaryColor,
+);
+
+TextStyle matSettingsScreenBody = _text.copyWith(
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle matSettingsScreenBodyBlack = _text.copyWith(
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+  color: dmPrimaryColor,
+);
+
+TextStyle matSettingsScreenAppBarGreen = _text.copyWith(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+  color: lmSettingScreenAppBarButton,
+);
+
+TextStyle matSettingsScreenBodyCategory = _text.copyWith(
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+  color: lmSettingsScreenBodyCategory,
+);
+
+TextStyle matSettingsScreenBodyCategoryItem = _text.copyWith(
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+);
+
+TextStyle matSettingsScreenBodyCategoryItemBlack = _text.copyWith(
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+  color: dmPrimaryColor,
 );

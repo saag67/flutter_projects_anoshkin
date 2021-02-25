@@ -16,6 +16,10 @@ class SightDetails extends StatefulWidget {
 }
 
 class _SightDetailsState extends State<SightDetails> {
+  void _omItemTaped(int index) {
+    index == 0 ? print("Planned") : print("Added to Favorites");
+  }
+
   @override
   Widget build(BuildContext context) {
     double height1 = MediaQuery.of(context).size.height;
@@ -26,14 +30,19 @@ class _SightDetailsState extends State<SightDetails> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Container(
-            width: 30,
-            height: 30,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
+          icon: InkWell(
+            onTap: () {
+              print("Go back");
+            },
+            child: Container(
+              width: 30,
+              height: 30,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              child: Icon(Icons.arrow_back_ios_outlined),
             ),
-            child: Icon(Icons.arrow_back_ios_outlined),
           ),
           onPressed: () {},
           color: Colors.black,
@@ -88,8 +97,10 @@ class _SightDetailsState extends State<SightDetails> {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: () {},
+          InkWell(
+            onTap: () {
+              print("the route created");
+            },
             child: Container(
               margin: EdgeInsets.all(20),
               padding: EdgeInsets.all(15),
@@ -124,6 +135,7 @@ class _SightDetailsState extends State<SightDetails> {
             label: add_to_favourites,
           ),
         ],
+        onTap: _omItemTaped,
       ),
     );
   }

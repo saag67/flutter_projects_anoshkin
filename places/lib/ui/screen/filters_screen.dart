@@ -1,0 +1,278 @@
+import 'dart:core';
+import 'dart:math';
+
+import 'package:circular_check_box/circular_check_box.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:places/domain/sight.dart';
+import 'package:places/main.dart';
+import 'package:places/mocks.dart';
+import 'package:places/res/colors/colors.dart';
+import 'package:places/res/const/const.dart';
+import 'package:places/res/strings/strings.dart';
+import 'package:places/res/styles/styles.dart';
+
+///Класс фильтров интересных мест
+class FiltersScreen extends StatefulWidget {
+  @override
+  _FiltersScreenState createState() => _FiltersScreenState();
+}
+
+class _FiltersScreenState extends State<FiltersScreen> {
+  Sight sight;
+
+  //список для хранения названий интересных мест
+  List<Widget> names = [];
+
+  //метод очистки chtckbox'ов
+  void clearAll(int i) {
+    checkboxButtons[i] = false;
+  }
+
+  //переменная для хранения координат пользователя, сделано так потому что
+  // радиус 10 км, а данные берутся из моков, то что вокруг меня
+  Map<String, double> centerPoint = {"lat": 47.093373, "lon": 51.876929};
+  //переменная для хранения координат интересного места
+  Map<String, double> checkPoint = {"lat": 0.0, "lon": 0.0};
+  //метод для проверки существует ли точка интереса в заданных радиусах от пользователя
+  bool arePointsNears(checkPoint, centerPoint, min, max) {
+    var ky = 40000 / 360;
+    var kx = cos(pi * centerPoint["lat"] / 180.0) * ky;
+    var dx = (centerPoint["lon"] - checkPoint["lon"]).abs() * kx;
+    var dy = (centerPoint["lat"] - checkPoint["lat"]).abs() * ky;
+    return sqrt(dx * dx + dy * dy) >= min && sqrt(dx * dx + dy * dy) <= max;
+  }
+
+  //метод получениякоординат из моковых данных, проверки их и добавления в список,
+  // если они находятся между максимальным и минимальным радиусом от пользователя
+  void getCoords(Sight sight, double minRadius, double maxRadius) {
+    for (int i = 0; i < mocks.length; i++) {
+      checkPoint["lat"] = double.parse(mocks[i].lat);
+      checkPoint["lon"] = double.parse(mocks[i].lon);
+
+      if (arePointsNears(checkPoint, centerPoint, minRadius, maxRadius))
+        names.add(Text(mocks[i].name));
+    }
+  }
+
+  //метод отрисовки шаблона фильтра в цикле с его кастомизацией в итерации
+  Widget addFilter(int i) {
+    List<Widget> footers = [
+      RichText(
+        text: TextSpan(
+          style: matSettingsScreenBodyCategoryItemBlack,
+          text: hotel,
+        ),
+      ),
+      RichText(
+        text: TextSpan(
+          style: matSettingsScreenBodyCategoryItemBlack,
+          text: restaurant,
+        ),
+      ),
+      RichText(
+        text: TextSpan(
+          style: matSettingsScreenBodyCategoryItemBlack,
+          text: special_place,
+        ),
+      ),
+      RichText(
+        text: TextSpan(
+          style: matSettingsScreenBodyCategoryItemBlack,
+          text: park,
+        ),
+      ),
+      RichText(
+        text: TextSpan(
+          style: matSettingsScreenBodyCategoryItemBlack,
+          text: museum,
+        ),
+      ),
+      RichText(
+        text: TextSpan(
+          style: matSettingsScreenBodyCategoryItemBlack,
+          text: cafe,
+        ),
+      ),
+    ];
+
+    List<String> pictures = [
+      "res/assets/hotel.svg",
+      "res/assets/restaurant.svg",
+      "res/assets/special_place.svg",
+      "res/assets/park.svg",
+      "res/assets/museum.svg",
+      "res/assets/cafe.svg"
+    ];
+
+    return Container(
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              InkWell(
+                onTap: () {
+                  setState(() {
+                    checkboxButtons[i] = !checkboxButtons[i];
+                  });
+                },
+                child: Container(
+                  height: 68,
+                  width: 68,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFF4cAF50).withOpacity(0.15),
+                  ),
+                  child: SvgPicture.asset(pictures[i], fit: BoxFit.scaleDown),
+                ),
+              ),
+              Positioned(
+                right: -11,
+                bottom: -11,
+                child: CircularCheckBox(
+                  activeColor: Colors.black,
+                  value: checkboxButtons[i],
+                  onChanged: (currentValue) {
+                    setState(() {
+                      checkboxButtons[i] = currentValue;
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+          footers[i],
+        ],
+      ),
+    );
+  }
+
+  RangeValues values = RangeValues(100, 10000);
+  double start = 100;
+  double end = 10000;
+  String quantuty = "";
+
+  @override
+  Widget build(BuildContext context) {
+    double width1 = MediaQuery.of(context).size.width;
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_outlined),
+        ),
+        actions: [
+          FlatButton(
+            onPressed: () {
+              setState(() {
+                for (int i = 0; i < checkboxButtons.length; i++) clearAll(i);
+              });
+            },
+            child: RichText(
+              text: TextSpan(
+                style: matSettingsScreenAppBarGreen,
+                text: clear_all,
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              GridView.count(
+                shrinkWrap: true,
+                crossAxisCount: 3,
+                children: [
+                  for (int i = 0; i < checkboxButtons.length; i++) addFilter(i),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        style: App.isDarkTheme
+                            ? matSettingsScreenBody
+                            : matSettingsScreenBodyBlack,
+                        text: distance,
+                      ),
+                    ),
+                    Spacer(),
+                    RichText(
+                      text: TextSpan(
+                        style: App.isDarkTheme
+                            ? matSettingsScreenBody
+                            : matSettingsScreenBodyBlack,
+                        text: "От ${start} до ${end} км.",
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              RangeSlider(
+                values: values,
+                divisions: 10,
+                min: 100,
+                max: 10000,
+                onChanged: (RangeValues currentValue) {
+                  setState(() {
+                    values = currentValue;
+                  });
+                },
+                onChangeStart: (RangeValues startData) {
+                  setState(() {
+                    start = values.start.roundToDouble() / 1000;
+                  });
+                },
+                onChangeEnd: (RangeValues endData) {
+                  setState(() {
+                    end = values.end.roundToDouble() / 1000;
+
+                    names.clear();
+                    getCoords(sight, start, end);
+                  });
+                },
+              ),
+              for (var name in names) name,
+            ],
+          ),
+          Positioned(
+            bottom: 5,
+            right: 10,
+            left: 10,
+            child: InkWell(
+              onTap: () {
+                print("Show");
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  width: 328,
+                  height: 48,
+                  color: lmSettingScreenAppBarButton,
+                  child: Center(
+                    child: RichText(
+                      text: TextSpan(
+                        style: matSubtitleShow,
+                        text: "$show ($quantuty)",
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

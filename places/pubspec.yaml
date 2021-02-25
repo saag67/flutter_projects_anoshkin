@@ -13,6 +13,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  provider: ^4.3.3
+
 
   cupertino_icons: ^1.0.0
   flutter_svg: ^0.19.1
@@ -20,12 +22,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  circular_check_box: ^1.0.4
 
 
 flutter:
   uses-material-design: true
   assets:
-    - res/
+    - res/assets/
+
 
   fonts:
     - family: Roboto

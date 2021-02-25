@@ -57,14 +57,13 @@ class _SightListScreenState extends State<SightListScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationBar(),
     );
   }
 }
 
 ///класс кастомного виджета, наследника PreferredSize
 class MyAppBar extends PreferredSize {
-  MyAppBar({Key key, Widget title, Color color, int elevation})
+  MyAppBar({Key key, Widget leading, Widget title, Color color, int elevation})
       : super(
           key: key,
           preferredSize: Size.fromHeight(56.0),
@@ -73,33 +72,5 @@ class MyAppBar extends PreferredSize {
             //backgroundColor: Colors.white,
             elevation: 0,
           ),
-        );
-}
-
-///класс меню BottomNavigationBar для экранов SightListScreen и VisitingScreen
-
-class NavigationBar extends BottomNavigationBar {
-  NavigationBar({Key key})
-      : super(
-          currentIndex: 0,
-          type: BottomNavigationBarType.fixed,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.map_outlined),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: '',
-            ),
-          ],
         );
 }

@@ -1,55 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:places/mocks.dart';
 import 'package:places/res/screens/themes.dart';
-import 'package:places/ui/screen/sight_details.dart';
+import 'package:places/ui/screen/filters_screen.dart';
 
-void main() {
-  runApp(App());
-}
+void main() => runApp(App());
 
 ///класс приложения "Список интересных мест"
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   //статическая переменная для переключения тем,
   // темы переключаются путем изменения значения и перезагрузки эмулятора
   static bool isDarkTheme = false;
+
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: isDarkTheme ? darkTheme : lightTheme,
-      title: "Places",
-      home: SightDetails(mocks[1]),
-    );
+    return AppBuilder(builder: (context) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: App.isDarkTheme ? darkTheme : lightTheme,
+        title: "Places",
+        home: FiltersScreen(),
+      );
+    });
   }
 }
 
-class MyFirstWidget extends StatelessWidget {
+//класс для перерисовки всего приложения при переключении тем
+class AppBuilder extends StatefulWidget {
+  final Function(BuildContext) builder;
+
+  const AppBuilder({Key key, this.builder}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("Hello"),
-      ),
-    );
+  AppBuilderState createState() => new AppBuilderState();
+
+  static AppBuilderState of(BuildContext context) {
+    return context.ancestorStateOfType(const TypeMatcher<AppBuilderState>());
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class AppBuilderState extends State<AppBuilder> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("Stateful widget"),
-      ),
-    );
+    return widget.builder(context);
+  }
+
+  void rebuild() {
+    setState(() {});
   }
 }
