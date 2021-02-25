@@ -14,13 +14,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   PageController _pageController = PageController();
+
   List<Widget> _screens = [
     SightListScreen(),
     MapScreen(),
     VisitingScreen(),
     SettingsScreen()
   ];
+
   int _selectedIndex = 0;
+
   void _onPageChanged(int index) {
     _selectedIndex = index;
     setState(() {});

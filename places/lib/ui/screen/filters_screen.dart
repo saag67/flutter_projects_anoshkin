@@ -8,6 +8,7 @@ import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
 import 'package:places/mocks.dart';
 import 'package:places/res/colors/colors.dart';
+import 'package:places/res/const/const.dart';
 import 'package:places/res/strings/strings.dart';
 import 'package:places/res/styles/styles.dart';
 
@@ -19,34 +20,21 @@ class FiltersScreen extends StatefulWidget {
 
 class _FiltersScreenState extends State<FiltersScreen> {
   Sight sight;
-  static bool chkbox1 = false;
-  static bool chkbox2 = false;
-  static bool chkbox3 = false;
-  static bool chkbox4 = false;
-  static bool chkbox5 = false;
-  static bool chkbox6 = false;
-//список для хранения названий интересных мест
+
+  //список для хранения названий интересных мест
   List<Widget> names = [];
-//список переменных состояния checkbox, не понял как их объеденить с инициализанией
-  List<bool> checkboxButtons = [
-    chkbox1,
-    chkbox2,
-    chkbox3,
-    chkbox4,
-    chkbox5,
-    chkbox6
-  ];
+
   //метод очистки chtckbox'ов
   void clearAll(int i) {
     checkboxButtons[i] = false;
   }
 
-//переменная для хранения координат пользователя, сделано так потому что
-  //радиус 10 км, а данные берутся из моков, то что вокруг меня
+  //переменная для хранения координат пользователя, сделано так потому что
+  // радиус 10 км, а данные берутся из моков, то что вокруг меня
   Map<String, double> centerPoint = {"lat": 47.093373, "lon": 51.876929};
   //переменная для хранения координат интересного места
   Map<String, double> checkPoint = {"lat": 0.0, "lon": 0.0};
-//метод для проверки существует ли точка интереса в заданных радиусах от пользователя
+  //метод для проверки существует ли точка интереса в заданных радиусах от пользователя
   bool arePointsNears(checkPoint, centerPoint, min, max) {
     var ky = 40000 / 360;
     var kx = cos(pi * centerPoint["lat"] / 180.0) * ky;
@@ -55,8 +43,8 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return sqrt(dx * dx + dy * dy) >= min && sqrt(dx * dx + dy * dy) <= max;
   }
 
-//метод получениякоординат из моковых данных, проверки их и добавления в список,
-// если они находятся между максимальным и минимальным радиусом от пользователя
+  //метод получениякоординат из моковых данных, проверки их и добавления в список,
+  // если они находятся между максимальным и минимальным радиусом от пользователя
   void getCoords(Sight sight, double minRadius, double maxRadius) {
     for (int i = 0; i < mocks.length; i++) {
       checkPoint["lat"] = double.parse(mocks[i].lat);
@@ -67,7 +55,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
     }
   }
 
-//метод отрисовки шаблона фильтра в цикле с его кастомизацией в итерации
+  //метод отрисовки шаблона фильтра в цикле с его кастомизацией в итерации
   Widget addFilter(int i) {
     List<Widget> footers = [
       RichText(
@@ -162,7 +150,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   RangeValues values = RangeValues(100, 10000);
   double start = 100;
   double end = 10000;
-  String target = "";
+  String quantuty = "";
 
   @override
   Widget build(BuildContext context) {
@@ -275,7 +263,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                     child: RichText(
                       text: TextSpan(
                         style: matSubtitleShow,
-                        text: "$show ($target)",
+                        text: "$show ($quantuty)",
                       ),
                     ),
                   ),

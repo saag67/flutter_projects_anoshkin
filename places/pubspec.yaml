@@ -28,12 +28,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - res/assets/hotel.svg
-    - res/assets/cafe.svg
-    - res/assets/museum.svg
-    - res/assets/park.svg
-    - res/assets/restaurant.svg
-    - res/assets/special_place.svg
+    - res/assets/
 
 
   fonts:
