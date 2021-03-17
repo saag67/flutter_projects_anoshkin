@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
+import 'package:places/res/colors/colors.dart';
 import 'package:places/res/strings/strings.dart';
 import 'package:places/res/styles/styles.dart';
 
@@ -32,6 +33,7 @@ class _SightDetailsState extends State<SightDetails> {
         leading: IconButton(
           icon: InkWell(
             onTap: () {
+              Navigator.pop(context);
               print("Go back");
             },
             child: Container(
@@ -48,74 +50,78 @@ class _SightDetailsState extends State<SightDetails> {
           color: Colors.black,
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          Container(
-            width: width1,
-            height: height1 / 2,
-            color: Colors.lightBlue,
-            child: Image.network(
-              widget.sight.url,
-              loadingBuilder: (context, child, progress) {
-                return progress == null
-                    ? child
-                    : Center(
-                        child: RefreshProgressIndicator(),
-                      );
-              },
-              fit: BoxFit.fill,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            child: RichText(
-              textAlign: TextAlign.start,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 7,
-              text: TextSpan(
-                style: TextStyle(
-                  color: App.isDarkTheme ? Colors.white : Colors.black,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                // width: width1,
+                //height: height1 / 2,
+                color: Colors.lightBlue,
+                child: Image.network(
+                  widget.sight.url,
+                  loadingBuilder: (context, child, progress) {
+                    return progress == null
+                        ? child
+                        : Center(
+                            child: RefreshProgressIndicator(),
+                          );
+                  },
+                  fit: BoxFit.contain,
                 ),
-                children: [
-                  TextSpan(
-                    text: "${widget.sight.name}\n",
-                    style: matHeadline5,
-                  ),
-                  TextSpan(
-                    text: "${widget.sight.type}\n",
-                    style: matSubtitle2,
-                  ),
-                  TextSpan(
-                    text: " \n",
-                  ),
-                  TextSpan(
-                    text: "${widget.sight.details}",
-                    style: matSubtitle2light,
-                  ),
-                ],
               ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              print("the route created");
-            },
-            child: Container(
-              margin: EdgeInsets.all(20),
-              padding: EdgeInsets.all(15),
-              width: width1,
-              decoration: BoxDecoration(
-                color: Colors.green,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
+              Container(
+                padding: EdgeInsets.all(10),
                 child: RichText(
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 7,
                   text: TextSpan(
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
+                      color: App.isDarkTheme ? Colors.white : Colors.black,
                     ),
+                    children: [
+                      TextSpan(
+                        text: "${widget.sight.name}\n",
+                        style: matHeadline5,
+                      ),
+                      TextSpan(
+                        text: "${widget.sight.type}\n",
+                        style: matSubtitle2,
+                      ),
+                      TextSpan(
+                        text: " \n",
+                      ),
+                      TextSpan(
+                        text: "${widget.sight.details}",
+                        style: matSubtitle2light,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            bottom: 15,
+            right: 10,
+            left: 10,
+            child: ElevatedButton(
+              onPressed: () {
+                print("the route created");
+              },
+              style: ElevatedButton.styleFrom(
+                primary: lmSettingScreenAppBarButton,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: RichText(
+                  text: TextSpan(
+                    style: matDetailsButton,
                     text: create_route,
                   ),
                 ),

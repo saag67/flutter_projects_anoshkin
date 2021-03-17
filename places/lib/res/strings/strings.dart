@@ -1,5 +1,8 @@
 ///строковый ресурс для приложения
+
 String category = 'КАТЕГОРИИ';
+String category_header = "Категория";
+String category_subtitle = "КАТЕГОРИЯ";
 String create_route = 'построить маршрут';
 String to_schedule = "Запланировать";
 String add_to_favourites = "Добавить в Избранное";
@@ -22,3 +25,25 @@ String distance = "Расстояние";
 String from = "от";
 String to = "до";
 String km = "км";
+String new_sight = "НОВОЕ МЕСТО";
+String plus = "+";
+String new_sight_header = "Новое место";
+String cancel = "Отмена";
+String not_selected = "Не выбрано";
+String name_uppercase = "Название";
+String latitude_uppercase = "ШИРОТА";
+String longitude_uppercase = "ДОЛГОТА";
+String point_on_the_map = "Указать на карте";
+String description_uppercase = "ОПИСАНИЕ";
+String cfreate_uppecase = "СОЗДАТЬ";
+String cinema = "Кинотеатр";
+String theatre = "Театр";
+String toSave = "Сохранить";
+String list_of_interesting_sights = "Список интересных мест";
+String you_were_looking_for = "ВЫ ИСКАЛИ";
+String clear_history = "Очистить историю";
+String search = "Поиск";
+String no_connection = "Нет соединения";
+String check_connection = "Проверьте соединение и попробуйте еще раз";
+String search_failed = "Ничего не найдено";
+String change_conditions = "Попробуйте изменить параметры поиска";

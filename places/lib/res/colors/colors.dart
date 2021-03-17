@@ -10,6 +10,7 @@ const Color lmPrimaryColor = Colors.white,
     lmBottomBarSelectedColor = dmPrimaryColorDark,
     lmBottomBarUnselectedColor = dmPrimaryColor,
     lmSettingScreenAppBarButton = Color(0xFF4CAF50),
+    lmFloatingActionButton = Color(0xFFFCDD3D),
     lmSettingsScreenBodyCategory = Color(0x8F7C7E92),
     lmCheckBoxFill = Color(0xFF252849);
 

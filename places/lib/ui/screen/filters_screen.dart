@@ -23,6 +23,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   //список для хранения названий интересных мест
   List<Widget> names = [];
+  List<Sight> mySights = [];
 
   //метод очистки chtckbox'ов
   void clearAll(int i) {
@@ -35,23 +36,27 @@ class _FiltersScreenState extends State<FiltersScreen> {
   //переменная для хранения координат интересного места
   Map<String, double> checkPoint = {"lat": 0.0, "lon": 0.0};
   //метод для проверки существует ли точка интереса в заданных радиусах от пользователя
-  bool arePointsNears(checkPoint, centerPoint, min, max) {
+  bool arePointsNears(Map<String, double> checkPoint,
+      Map<String, double> centerPoint, double min, double max) {
     var ky = 40000 / 360;
-    var kx = cos(pi * centerPoint["lat"] / 180.0) * ky;
-    var dx = (centerPoint["lon"] - checkPoint["lon"]).abs() * kx;
-    var dy = (centerPoint["lat"] - checkPoint["lat"]).abs() * ky;
+    double kx = cos(pi * centerPoint["lat"] / 180.0) * ky;
+    double dx = (centerPoint["lon"] - checkPoint["lon"]).abs() * kx;
+    double dy = (centerPoint["lat"] - checkPoint["lat"]).abs() * ky;
     return sqrt(dx * dx + dy * dy) >= min && sqrt(dx * dx + dy * dy) <= max;
   }
 
   //метод получениякоординат из моковых данных, проверки их и добавления в список,
   // если они находятся между максимальным и минимальным радиусом от пользователя
   void getCoords(Sight sight, double minRadius, double maxRadius) {
+    mySights.clear();
     for (int i = 0; i < mocks.length; i++) {
       checkPoint["lat"] = double.parse(mocks[i].lat);
       checkPoint["lon"] = double.parse(mocks[i].lon);
 
-      if (arePointsNears(checkPoint, centerPoint, minRadius, maxRadius))
+      if (arePointsNears(checkPoint, centerPoint, minRadius, maxRadius)) {
         names.add(Text(mocks[i].name));
+        mySights.add(mocks[i]);
+      }
     }
   }
 
@@ -94,15 +99,6 @@ class _FiltersScreenState extends State<FiltersScreen> {
           text: cafe,
         ),
       ),
-    ];
-
-    List<String> pictures = [
-      "res/assets/hotel.svg",
-      "res/assets/restaurant.svg",
-      "res/assets/special_place.svg",
-      "res/assets/park.svg",
-      "res/assets/museum.svg",
-      "res/assets/cafe.svg"
     ];
 
     return Container(
@@ -159,6 +155,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context, mySights);
+          },
           icon: Icon(Icons.arrow_back_ios_outlined),
         ),
         actions: [
@@ -249,23 +248,22 @@ class _FiltersScreenState extends State<FiltersScreen> {
             bottom: 5,
             right: 10,
             left: 10,
-            child: InkWell(
-              onTap: () {
-                print("Show");
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context, mySights);
               },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: Container(
-                  width: 328,
-                  height: 48,
-                  color: lmSettingScreenAppBarButton,
-                  child: Center(
-                    child: RichText(
-                      text: TextSpan(
-                        style: matSubtitleShow,
-                        text: "$show ($quantuty)",
-                      ),
-                    ),
+              style: ElevatedButton.styleFrom(
+                primary: lmSettingScreenAppBarButton,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: RichText(
+                  text: TextSpan(
+                    style: matSubtitleShow,
+                    text: show,
                   ),
                 ),
               ),
