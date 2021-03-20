@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
 import 'package:places/res/colors/colors.dart';
+import 'package:places/ui/screen/sight_details.dart';
 
 ///класс карточки интересного места
 class SightCard extends StatelessWidget {
@@ -111,6 +112,12 @@ class SightCard extends StatelessWidget {
             color: Colors.transparent,
             child: InkWell(
               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<Widget>(
+                    builder: (context) => SightDetails(sight),
+                  ),
+                );
                 print("Taped");
               },
             ),

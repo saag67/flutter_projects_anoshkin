@@ -13,7 +13,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   var isValue = false;
 
-  onSwitchValueChanged(bool currentValue) {
+  Widget onSwitchValueChanged(bool currentValue) {
     setState(() {
       isValue = currentValue;
       App.isDarkTheme = !App.isDarkTheme;

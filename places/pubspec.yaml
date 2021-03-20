@@ -13,22 +13,26 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  provider: ^4.3.3
+  google_maps_flutter: ^1.2.0
+  circular_check_box: ^1.0.4
+  provider: ^5.0.0
 
 
   cupertino_icons: ^1.0.0
-  flutter_svg: ^0.19.1
+  flutter_svg: ^0.19.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   circular_check_box: ^1.0.4
+  surf_lint_rules: ^0.0.2-dev.3
+
 
 
 flutter:
   uses-material-design: true
   assets:
-    - res/assets/
+      - res/assets/
 
 
   fonts:

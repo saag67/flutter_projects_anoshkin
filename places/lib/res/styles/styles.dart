@@ -35,6 +35,11 @@ TextStyle matHeadline5 = _text.copyWith(
   fontSize: 24,
 );
 
+TextStyle matDetailsButton = _text.copyWith(
+  fontWeight: FontWeight.w700,
+  fontSize: 20,
+);
+
 TextStyle matSubtitle2 = _text.copyWith(
   fontWeight: FontWeight.w700,
   fontSize: 14,
@@ -49,6 +54,12 @@ TextStyle matSubtitleShow = _text.copyWith(
 TextStyle matSubtitle2light = _text.copyWith(
   fontWeight: FontWeight.w400,
   fontSize: 14,
+);
+
+TextStyle matSubtitle2Grey = _text.copyWith(
+  fontWeight: FontWeight.w400,
+  fontSize: 14,
+  color: dmSecondaryBlack,
 );
 
 TextStyle matSettingsScreenHeader = _text.copyWith(
@@ -79,6 +90,35 @@ TextStyle matSettingsScreenAppBarGreen = _text.copyWith(
   color: lmSettingScreenAppBarButton,
 );
 
+TextStyle matSettingsScreenAppBarBlack = _text.copyWith(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+  color: dmSecondaryBlack,
+);
+TextStyle matSearchScreenResult = _text.copyWith(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+  //color: dmSecondaryBlack,
+);
+
+TextStyle matSearchScreenResultBlack = _text.copyWith(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+  color: dmPrimaryColor,
+);
+
+TextStyle matMap = _text.copyWith(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+  color: lmSettingScreenAppBarButton,
+);
+
+TextStyle matSelectCategory = _text.copyWith(
+  fontSize: 16,
+  fontWeight: FontWeight.normal,
+  color: dmSecondaryBlack,
+);
+
 TextStyle matSettingsScreenBodyCategory = _text.copyWith(
   fontSize: 12,
   fontWeight: FontWeight.w400,
@@ -94,4 +134,33 @@ TextStyle matSettingsScreenBodyCategoryItemBlack = _text.copyWith(
   fontSize: 12,
   fontWeight: FontWeight.w400,
   color: dmPrimaryColor,
+);
+
+TextStyle matSettingsScreenBodyCategoryItemDarkGrey = _text.copyWith(
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+  color: dmSecondaryBlack,
+);
+
+TextStyle matSettingsScreenBodyCategoryItemBlackNormal = _text.copyWith(
+  fontSize: 12,
+  fontWeight: FontWeight.normal,
+  color: dmSecondaryBlack,
+);
+
+TextStyle matAddNewSightHeader = _text.copyWith(
+  fontSize: 18,
+  fontWeight: FontWeight.w500,
+);
+
+TextStyle matAddNewSightHeaderBlack = _text.copyWith(
+  fontSize: 18,
+  fontWeight: FontWeight.w500,
+  color: dmPrimaryColor,
+);
+
+TextStyle matAddNewSightHeaderGrey = _text.copyWith(
+  fontSize: 18,
+  fontWeight: FontWeight.w500,
+  color: dmSecondaryBlack,
 );

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:places/res/screens/themes.dart';
-import 'package:places/ui/screen/filters_screen.dart';
+import 'package:places/ui/screen/home_page_screen.dart';
 
-void main() => runApp(App());
+void main() {
+  runApp(App());
+}
 
 ///класс приложения "Список интересных мест"
 class App extends StatefulWidget {
@@ -28,7 +30,7 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         theme: App.isDarkTheme ? darkTheme : lightTheme,
         title: "Places",
-        home: FiltersScreen(),
+        home: HomePage(),
       );
     });
   }
@@ -36,7 +38,7 @@ class _AppState extends State<App> {
 
 //класс для перерисовки всего приложения при переключении тем
 class AppBuilder extends StatefulWidget {
-  final Function(BuildContext) builder;
+  final Widget Function(BuildContext) builder;
 
   const AppBuilder({Key key, this.builder}) : super(key: key);
 
@@ -44,7 +46,7 @@ class AppBuilder extends StatefulWidget {
   AppBuilderState createState() => new AppBuilderState();
 
   static AppBuilderState of(BuildContext context) {
-    return context.ancestorStateOfType(const TypeMatcher<AppBuilderState>());
+    return context.findAncestorStateOfType<AppBuilderState>();
   }
 }
 
