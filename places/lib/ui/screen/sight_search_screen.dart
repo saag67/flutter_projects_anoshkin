@@ -57,7 +57,7 @@ class _SightSearchScreenState extends State<SightSearchScreen> {
   Widget searchedItem(Sight sight, int index) {
     return ListTile(
       trailing: IconButton(
-        icon: Icon(Icons.cancel),
+        icon: const Icon(Icons.cancel),
         onPressed: () {
           setState(() {
             items.removeAt(index);
@@ -84,7 +84,7 @@ class _SightSearchScreenState extends State<SightSearchScreen> {
             loadingBuilder: (context, child, progress) {
               return progress == null
                   ? child
-                  : Center(
+                  : const Center(
                       child: RefreshProgressIndicator(),
                     );
             },
@@ -119,7 +119,7 @@ class _SightSearchScreenState extends State<SightSearchScreen> {
         flexibleSpace: SafeArea(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -136,7 +136,7 @@ class _SightSearchScreenState extends State<SightSearchScreen> {
                                 ? dmSecondaryBlack
                                 : lmPrimaryColor,
                           ),
-                          child: Icon(Icons.arrow_back_ios_outlined),
+                          child: const Icon(Icons.arrow_back_ios_outlined),
                         ),
                         onPressed: () {
                           Navigator.pop(context);
@@ -155,7 +155,7 @@ class _SightSearchScreenState extends State<SightSearchScreen> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               SearchBar(enabled, onChange: (val) {

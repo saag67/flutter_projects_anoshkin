@@ -55,12 +55,130 @@ class _AddSightScreenState extends State<AddSightScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final fieldSightName = TextFormField(
+      controller: textControllerSightName,
+      autofocus: true,
+      enabled: true,
+      autovalidateMode: AutovalidateMode.disabled,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Please enter some text';
+        }
+
+        return null;
+      },
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.lightGreen),
+        ),
+      ),
+      focusNode: sightName,
+      onFieldSubmitted: (term) {
+        newSight.name = textControllerSightName.text;
+        sightName.unfocus();
+        FocusScope.of(context).requestFocus(latSight);
+      },
+    );
+
+    final fieldSightLat = TextFormField(
+      controller: textControllerLat,
+      focusNode: latSight,
+      enabled: true,
+      autovalidateMode: AutovalidateMode.disabled,
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please enter some text';
+        }
+
+        return null;
+      },
+      keyboardType: TextInputType.number,
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.lightGreen),
+        ),
+        suffixIcon: IconButton(
+          icon: const Icon(Icons.cancel),
+          onPressed: () {
+            textControllerLat.clear();
+          },
+        ),
+      ),
+      onFieldSubmitted: (term) {
+        newSight.lat = textControllerLat.text;
+        FocusScope.of(context).requestFocus(lonSight);
+      },
+    );
+
+    final fieldSightLon = TextFormField(
+      controller: textControllerLon,
+      enabled: true,
+      autovalidateMode: AutovalidateMode.disabled,
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please enter some text';
+        }
+
+        return null;
+      },
+      keyboardType: TextInputType.number,
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: const BorderSide(color: Colors.lightGreen),
+        ),
+        suffixIcon: IconButton(
+          icon: const Icon(Icons.cancel),
+          onPressed: () {
+            textControllerLon.clear();
+          },
+        ),
+      ),
+      focusNode: lonSight,
+      onFieldSubmitted: (term) {
+        newSight.lon = textControllerLon.text;
+        FocusScope.of(context).requestFocus(sightDescription);
+      },
+    );
+
+    final fieldSightDescription = TextFormField(
+      autovalidateMode: AutovalidateMode.disabled,
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'Please enter some text';
+        }
+
+        return null;
+      },
+      textInputAction: TextInputAction.done,
+      maxLines: 5,
+      controller: textControllerDescription,
+      onFieldSubmitted: (term) {
+        newSight.details = textControllerDescription.text;
+        newSight.url =
+            "https://3d-maps.kz/files/308/photos/308-1513156681-0806.jpg";
+        isValid = _formkey.currentState.validate();
+      },
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: const BorderSide(color: Colors.lightGreen),
+        ),
+      ),
+      focusNode: sightDescription,
+    );
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(
         title: Row(
           children: [
-            FlatButton(
+            TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -71,7 +189,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
                 ),
               ),
             ),
-            Spacer(
+            const Spacer(
               flex: 1,
             ),
             RichText(
@@ -80,7 +198,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
                 text: new_sight_header,
               ),
             ),
-            Spacer(
+            const Spacer(
               flex: 3,
             ),
           ],
@@ -123,7 +241,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
                       newSight.type = currentCategory ?? not_selected;
                       setState(() {});
                     }),
-                Divider(),
+                const Divider(),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 10),
@@ -141,35 +259,10 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     width: 328,
                     height: 40,
                     //New  sight name=============================================
-                    child: TextFormField(
-                      controller: textControllerSightName,
-                      autofocus: true,
-                      enabled: true,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-
-                        return null;
-                      },
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.lightGreen),
-                        ),
-                      ),
-                      focusNode: sightName,
-                      onFieldSubmitted: (term) {
-                        newSight.name = textControllerSightName.text;
-                        sightName.unfocus();
-                        FocusScope.of(context).requestFocus(latSight);
-                      },
-                    ),
+                    child: fieldSightName,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Row(
@@ -183,7 +276,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
                         ),
                       ),
                     ),
-                    Spacer(
+                    const Spacer(
                       flex: 1,
                     ),
                     Padding(
@@ -195,7 +288,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
                         ),
                       ),
                     ),
-                    Spacer(
+                    const Spacer(
                       flex: 1,
                     ),
                   ],
@@ -207,46 +300,14 @@ class _AddSightScreenState extends State<AddSightScreen> {
                       width: 156,
                       height: 40,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 0.0,
-                          horizontal: 10,
-                        ),
-                        //latitude================================================
-                        child: TextFormField(
-                          controller: textControllerLat,
-                          focusNode: latSight,
-                          enabled: true,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter some text';
-                            }
-
-                            return null;
-                          },
-                          keyboardType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.lightGreen),
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(Icons.cancel),
-                              onPressed: () {
-                                textControllerLat.clear();
-                              },
-                            ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 0.0,
+                            horizontal: 10,
                           ),
-                          onFieldSubmitted: (term) {
-                            newSight.lat = textControllerLat.text;
-                            FocusScope.of(context).requestFocus(lonSight);
-                            //latSight.unfocus();
-                          },
-                        ),
-                      ),
+                          //latitude================================================
+                          child: fieldSightLat),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 35,
                     ),
                     Container(
@@ -258,38 +319,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
                           horizontal: 10,
                         ),
                         //longetude===============================================
-                        child: TextFormField(
-                          controller: textControllerLon,
-                          enabled: true,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              return 'Please enter some text';
-                            }
-
-                            return null;
-                          },
-                          keyboardType: TextInputType.number,
-                          textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                              borderSide: BorderSide(color: Colors.lightGreen),
-                            ),
-                            suffixIcon: IconButton(
-                              icon: Icon(Icons.cancel),
-                              onPressed: () {
-                                textControllerLon.clear();
-                              },
-                            ),
-                          ),
-                          focusNode: lonSight,
-                          onFieldSubmitted: (term) {
-                            newSight.lon = textControllerLon.text;
-                            FocusScope.of(context)
-                                .requestFocus(sightDescription);
-                          },
-                        ),
+                        child: fieldSightLon,
                       ),
                     ),
                   ],
@@ -326,32 +356,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     width: 328,
                     height: 80,
                     //description================================================
-                    child: TextFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-
-                        return null;
-                      },
-                      textInputAction: TextInputAction.done,
-                      maxLines: 5,
-                      controller: textControllerDescription,
-                      onFieldSubmitted: (term) {
-                        newSight.details = textControllerDescription.text;
-                        newSight.url =
-                            "https://3d-maps.kz/files/308/photos/308-1513156681-0806.jpg";
-                        isValid = _formkey.currentState.validate();
-                      },
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: Colors.lightGreen),
-                        ),
-                      ),
-                      focusNode: sightDescription,
-                    ),
+                    child: fieldSightDescription,
                   ),
                 ),
               ],
