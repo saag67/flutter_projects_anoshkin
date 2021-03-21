@@ -10,16 +10,16 @@ import 'package:places/res/styles/styles.dart';
 ///класс экрана-детализации интересного места
 class SightDetails extends StatefulWidget {
   final Sight sight;
-  SightDetails(this.sight);
+  SightDetails(this.sight, {Key key}) : super(key: key);
 
   @override
   _SightDetailsState createState() => _SightDetailsState();
 }
 
 class _SightDetailsState extends State<SightDetails> {
-  void _omItemTaped(int index) {
-    index == 0 ? print("Planned") : print("Added to Favorites");
-  }
+  // void _omItemTaped(int index) {
+  //   index == 0 ? print('Planned') : print('Added to Favorites');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _SightDetailsState extends State<SightDetails> {
           icon: InkWell(
             onTap: () {
               Navigator.pop(context);
-              print("Go back");
+              //print("Go back");
             },
             child: Container(
               width: 30,
@@ -109,7 +109,7 @@ class _SightDetailsState extends State<SightDetails> {
             left: 10,
             child: ElevatedButton(
               onPressed: () {
-                print("the route created");
+                //print("the route created");
               },
               style: ElevatedButton.styleFrom(
                 primary: lmSettingScreenAppBarButton,
@@ -141,7 +141,7 @@ class _SightDetailsState extends State<SightDetails> {
             label: add_to_favourites,
           ),
         ],
-        onTap: _omItemTaped,
+        //onTap: () {},
       ),
     );
   }

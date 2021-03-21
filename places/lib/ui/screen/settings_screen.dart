@@ -6,6 +6,7 @@ import 'package:places/ui/screen/sight_list_screen.dart';
 
 ///Класс экрана настроек приложения
 class SettingsScreen extends StatefulWidget {
+  SettingsScreen({Key key}) : super(key: key);
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -79,7 +80,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Colors.green,
                     ),
                     onPressed: () {
-                      print("printed Manual");
+                      //print("printed Manual");
                     }),
               ],
             ),

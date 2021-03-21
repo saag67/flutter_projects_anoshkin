@@ -11,6 +11,7 @@ import 'package:places/ui/screen/sight_category_screen.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 
 class AddSightScreen extends StatefulWidget {
+  AddSightScreen({Key key}) : super(key: key);
   @override
   _AddSightScreenState createState() => _AddSightScreenState();
 }
@@ -60,7 +61,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       autofocus: true,
       enabled: true,
       autovalidateMode: AutovalidateMode.disabled,
-      validator: (String value) {
+      validator: (value) {
         if (value.isEmpty) {
           return 'Please enter some text';
         }
@@ -161,7 +162,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       onFieldSubmitted: (term) {
         newSight.details = textControllerDescription.text;
         newSight.url =
-            "https://3d-maps.kz/files/308/photos/308-1513156681-0806.jpg";
+            'https://3d-maps.kz/files/308/photos/308-1513156681-0806.jpg';
         isValid = _formkey.currentState.validate();
       },
       decoration: InputDecoration(

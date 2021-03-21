@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
 import 'package:places/res/colors/colors.dart';
@@ -9,7 +8,7 @@ import 'package:places/ui/screen/sight_details.dart';
 class SightCard extends StatelessWidget {
   final Sight sight;
 
-  SightCard(this.sight);
+  SightCard(this.sight, {Key key}) : super(key: key);
 
   Widget buttonBar() {
     return ButtonBar(
@@ -20,7 +19,7 @@ class SightCard extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            print("Added to Favorites");
+            //print("Added to Favorites");
           },
         )
       ],
@@ -118,7 +117,7 @@ class SightCard extends StatelessWidget {
                     builder: (context) => SightDetails(sight),
                   ),
                 );
-                print("Taped");
+                //print("Taped");
               },
             ),
           ),

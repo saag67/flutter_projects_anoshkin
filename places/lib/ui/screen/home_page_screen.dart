@@ -8,6 +8,7 @@ import 'package:places/ui/screen/visiting_screen.dart';
 ///написан для проверки переключения тем во всем приложении переключая
 ///кнопки BottomNavigationBar'a
 class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
   @override
   _HomePageState createState() => _HomePageState();
 }
