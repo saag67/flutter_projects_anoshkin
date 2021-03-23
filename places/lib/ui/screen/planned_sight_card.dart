@@ -16,18 +16,14 @@ class PlannedSightCard extends SightCard {
             Icons.calendar_today,
             color: Colors.white,
           ),
-          onPressed: () {
-            print("Planned");
-          },
+          onPressed: () {},
         ),
         IconButton(
           icon: Icon(
             Icons.cancel,
             color: Colors.white,
           ),
-          onPressed: () {
-            print("Canceled");
-          },
+          onPressed: () {},
         )
       ],
     );

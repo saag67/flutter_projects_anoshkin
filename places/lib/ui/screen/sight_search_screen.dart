@@ -12,6 +12,7 @@ import 'package:places/ui/screen/sight_details.dart';
 
 ///экран поиска интересного места
 class SightSearchScreen extends StatefulWidget {
+  SightSearchScreen({Key key}) : super(key: key);
   Sight sight;
 
   @override
@@ -223,6 +224,7 @@ class _SightSearchScreenState extends State<SightSearchScreen> {
 
 ///виджет-заглушка если поиск не увенчался успем
 class EmptyState extends StatelessWidget {
+  EmptyState({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double width1 = MediaQuery.of(context).size.width / 2;
@@ -267,6 +269,7 @@ class EmptyState extends StatelessWidget {
 
 ///Экран-заглушка в случае потери соединения
 class NoConnection extends StatelessWidget {
+  NoConnection({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double width1 = MediaQuery.of(context).size.width / 2;

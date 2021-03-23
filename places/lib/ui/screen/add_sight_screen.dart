@@ -11,6 +11,7 @@ import 'package:places/ui/screen/sight_category_screen.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 
 class AddSightScreen extends StatefulWidget {
+  AddSightScreen({Key key}) : super(key: key);
   @override
   _AddSightScreenState createState() => _AddSightScreenState();
 }

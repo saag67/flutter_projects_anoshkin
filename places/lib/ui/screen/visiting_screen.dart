@@ -10,6 +10,7 @@ import 'package:places/ui/screen/visited_sight_card.dart';
 
 ///класс экрана планируемых к посещению/посещенных мест
 class VisitingScreen extends StatefulWidget {
+  VisitingScreen({Key key}) : super(key: key);
   @override
   _VisitingScreenState createState() => _VisitingScreenState();
 }
