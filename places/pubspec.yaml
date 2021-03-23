@@ -15,7 +15,8 @@ dependencies:
     sdk: flutter
   google_maps_flutter: ^1.2.0
   circular_check_box: ^1.0.4
-  provider: ^5.0.0
+  flutter_slidable: ^0.5.7
+
 
 
   cupertino_icons: ^1.0.0

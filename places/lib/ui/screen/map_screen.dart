@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 ///может быть понадобится в будущем
 
 class MapScreen extends StatefulWidget {
+  MapScreen({Key key}) : super(key: key);
   @override
   _MapScreenState createState() => _MapScreenState();
 }

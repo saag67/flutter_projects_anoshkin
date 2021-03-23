@@ -11,6 +11,7 @@ import 'package:places/ui/screen/sight_search_screen.dart';
 
 ///класс экрана списка интересных мест
 class SightListScreen extends StatefulWidget {
+  SightListScreen({Key key}) : super(key: key);
   @override
   _SightListScreenState createState() => _SightListScreenState();
 }

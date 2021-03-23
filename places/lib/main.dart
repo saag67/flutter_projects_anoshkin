@@ -8,6 +8,7 @@ void main() {
 
 ///класс приложения "Список интересных мест"
 class App extends StatefulWidget {
+  App({Key key}) : super(key: key);
   //статическая переменная для переключения тем,
   // темы переключаются путем изменения значения и перезагрузки эмулятора
   static bool isDarkTheme = false;
@@ -19,7 +20,6 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -29,7 +29,7 @@ class _AppState extends State<App> {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: App.isDarkTheme ? darkTheme : lightTheme,
-        title: "Places",
+        title: 'Places',
         home: HomePage(),
       );
     });

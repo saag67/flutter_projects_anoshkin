@@ -9,7 +9,8 @@ import 'package:places/ui/screen/filters_screen.dart';
 ///виджет-поле поиска
 class SearchBar extends StatefulWidget {
   bool enabled = false;
-  SearchBar(this.enabled, {this.onChange, this.getSights});
+  SearchBar(this.enabled, {Key key, this.onChange, this.getSights})
+      : super(key: key);
   Function(String) onChange;
   Function(List<Sight>) getSights;
   List<Sight> sights = [];

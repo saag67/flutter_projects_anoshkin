@@ -142,6 +142,12 @@ TextStyle matSettingsScreenBodyCategoryItemDarkGrey = _text.copyWith(
   color: dmSecondaryBlack,
 );
 
+TextStyle matDismissible = _text.copyWith(
+  fontSize: 12,
+  fontWeight: FontWeight.w500,
+  color: lmPrimaryColor,
+);
+
 TextStyle matSettingsScreenBodyCategoryItemBlackNormal = _text.copyWith(
   fontSize: 12,
   fontWeight: FontWeight.normal,
