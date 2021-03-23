@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
@@ -11,7 +12,8 @@ import 'package:places/ui/screen/sight_category_screen.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 
 class AddSightScreen extends StatefulWidget {
-  AddSightScreen({Key key}) : super(key: key);
+  const AddSightScreen({Key key}) : super(key: key);
+
   @override
   _AddSightScreenState createState() => _AddSightScreenState();
 }
@@ -44,6 +46,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
   String category;
   String currentCategory = not_selected;
   Sight newSight = Sight('', '', '', '', '', '');
+  List<Sight> favoriteSights = [];
 
   @override
   void initState() {
@@ -54,6 +57,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
     sightDescription = FocusNode();
   }
 
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     final fieldSightName = TextFormField(
@@ -174,6 +178,79 @@ class _AddSightScreenState extends State<AddSightScreen> {
       focusNode: sightDescription,
     );
 
+    Widget previewPhoto(Sight sight, int index) {
+      return Dismissible(
+        key: UniqueKey(),
+        direction: DismissDirection.up,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            children: [
+              Container(
+                width: 72,
+                height: 72,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.network(
+                    sight.url,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 2,
+                right: 2,
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      favoriteSights.removeAt(index);
+                    });
+                  },
+                  child: Container(
+                    width: 20,
+                    height: 20,
+                    child: SvgPicture.asset(
+                      'res/assets/cancel_white.svg',
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                ),
+              ),
+              //),
+            ],
+          ),
+        ),
+      );
+    }
+
+    final firstItem = Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            favoriteSights.add(mocks[index]);
+            debugPrint("$index");
+            if (index < mocks.length - 1) {
+              index++;
+            } else {
+              index = 0;
+            }
+          });
+        },
+        child: Container(
+          width: 72,
+          height: 72,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: SvgPicture.asset(
+              'res/assets/add_card.svg',
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+      ),
+    );
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(
@@ -212,6 +289,16 @@ class _AddSightScreenState extends State<AddSightScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      firstItem,
+                      for (int i = 0; i < favoriteSights.length; i++)
+                        previewPhoto(favoriteSights[i], i),
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: RichText(
@@ -367,7 +454,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
               right: 10,
               left: 10,
               child: ElevatedButton(
-                // key: _formkey,
                 onPressed: isValid
                     ? () {
                         mocks.add(newSight);

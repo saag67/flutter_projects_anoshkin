@@ -132,10 +132,6 @@ class _VisitingScreenState extends State<VisitingScreen>
                 ),
               ],
             ),
-            //CustomTabIndicator(
-            //   tabController: tabController,
-            // ),
-
             preferredSize: Size.fromHeight(48),
           ),
         ),
@@ -144,7 +140,6 @@ class _VisitingScreenState extends State<VisitingScreen>
           children: [
             Tab(
               child: ListView.builder(
-                // key: ObjectKey(sight),
                 itemCount: plannedSights.length,
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
@@ -154,7 +149,6 @@ class _VisitingScreenState extends State<VisitingScreen>
                     child: plannedItems(plannedSights[index], index),
                   );
                 },
-                //хочу посетить
               ),
             ),
             Tab(
@@ -170,7 +164,6 @@ class _VisitingScreenState extends State<VisitingScreen>
             ),
           ],
         ),
-        // bottomNavigationBar: NavigationBar(),
       ),
     );
   }

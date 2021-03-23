@@ -47,3 +47,4 @@ String no_connection = "Нет соединения";
 String check_connection = "Проверьте соединение и попробуйте еще раз";
 String search_failed = "Ничего не найдено";
 String change_conditions = "Попробуйте изменить параметры поиска";
+String toDelete = "Удалить";
