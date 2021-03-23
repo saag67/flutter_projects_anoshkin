@@ -6,8 +6,11 @@ import 'package:places/ui/screen/sight_card.dart';
 
 class VisitedSightCard extends SightCard {
   final Sight sight;
+  Function(int index) onCancel;
+  VisitedSightCard(this.sight, {Key key, this.onCancel})
+      : super(sight, key: new ObjectKey(sight));
 
-  VisitedSightCard(this.sight) : super(sight);
+  int get index => null ?? 0;
 
   @override
   Widget buttonBar() {
@@ -19,7 +22,7 @@ class VisitedSightCard extends SightCard {
             color: Colors.white,
           ),
           onPressed: () {
-            print("Shared");
+            //print("Shared");
           },
         ),
         IconButton(
@@ -28,7 +31,8 @@ class VisitedSightCard extends SightCard {
             color: Colors.white,
           ),
           onPressed: () {
-            print("Canceled");
+            //print("Canceled");
+            onCancel(index);
           },
         )
       ],

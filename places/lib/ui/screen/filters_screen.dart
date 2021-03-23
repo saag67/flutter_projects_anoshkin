@@ -14,6 +14,7 @@ import 'package:places/res/styles/styles.dart';
 
 ///Класс фильтров интересных мест
 class FiltersScreen extends StatefulWidget {
+  FiltersScreen({Key key}) : super(key: key);
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }

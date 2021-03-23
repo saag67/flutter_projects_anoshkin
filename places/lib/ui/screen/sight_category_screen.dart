@@ -6,6 +6,7 @@ import 'package:places/res/styles/styles.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 
 class SightCategoryScreen extends StatefulWidget {
+  SightCategoryScreen({Key key}) : super(key: key);
   @override
   _SightCategoryScreenState createState() => _SightCategoryScreenState();
 }
@@ -55,41 +56,6 @@ class _SightCategoryScreenState extends State<SightCategoryScreen> {
               for (int i = 0; i < listCategories.length; i++) addCategory(i)
             ],
           ),
-          // Positioned(
-          //   bottom: 5,
-          //   right: 10,
-          //   left: 10,
-          //   child: InkWell(
-          //     onTap: () {
-          //       for (int i = 0; i < listCategories.length; i++) {
-          //         if (checkCategory[i]) {
-          //           category = listCategories[i];
-          //
-          //           break;
-          //         }
-          //       }
-          //
-          //       Navigator.pop(context, category);
-          //       clearAll();
-          //     },
-          //     child: ClipRRect(
-          //       borderRadius: BorderRadius.circular(12),
-          //       child: Container(
-          //         width: 328,
-          //         height: 48,
-          //         color: lmSettingScreenAppBarButton,
-          //         child: Center(
-          //           child: RichText(
-          //             text: TextSpan(
-          //               style: matSubtitle2,
-          //               text: toSave,
-          //             ),
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Positioned(
             bottom: 15,
             right: 10,
