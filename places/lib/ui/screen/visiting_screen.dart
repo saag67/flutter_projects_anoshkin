@@ -48,16 +48,6 @@ class _VisitingScreenState extends State<VisitingScreen>
     });
   }
 
-  void reorderData(List<Sight> list, int oldIndex, int newIndex) {
-    setState(() {
-      if (newIndex > oldIndex) {
-        newIndex -= 1;
-      }
-      final items = list.removeAt(oldIndex);
-      list.insert(newIndex, items);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -164,6 +154,11 @@ class _VisitingScreenState extends State<VisitingScreen>
                 },
                 itemBuilder: (context, index) {
                   return Dismissible(
+                    onDismissed: (direction) {
+                      setState(() {
+                        plannedSights.removeAt(index);
+                      });
+                    },
                     direction: DismissDirection.endToStart,
                     background: Container(
                       margin: EdgeInsets.only(right: 10.0),
@@ -216,6 +211,11 @@ class _VisitingScreenState extends State<VisitingScreen>
                 itemCount: visitedSights.length,
                 itemBuilder: (context, index) {
                   return Dismissible(
+                    onDismissed: (direction) {
+                      setState(() {
+                        visitedSights.removeAt(index);
+                      });
+                    },
                     direction: DismissDirection.endToStart,
                     background: Container(
                       margin: EdgeInsets.only(right: 10.0),
