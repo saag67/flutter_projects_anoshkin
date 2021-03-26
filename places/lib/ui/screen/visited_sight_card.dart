@@ -8,7 +8,7 @@ class VisitedSightCard extends SightCard {
   final Sight sight;
   Function(int index) onCancel;
   VisitedSightCard(this.sight, {Key key, this.onCancel})
-      : super(sight, key: new ObjectKey(sight));
+      : super(sight, key: key);
 
   int get index => null ?? 0;
 

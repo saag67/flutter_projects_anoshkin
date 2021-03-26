@@ -54,6 +54,9 @@ class _AddSightScreenState extends State<AddSightScreen> {
     sightDescription = FocusNode();
   }
 
+  List<Sight> favoriteSights = [];
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     final fieldSightName = TextFormField(
@@ -174,6 +177,77 @@ class _AddSightScreenState extends State<AddSightScreen> {
       focusNode: sightDescription,
     );
 
+    Widget previewPhoto(Sight sight, int index) {
+      return Dismissible(
+        direction: DismissDirection.up,
+        key: UniqueKey(),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            children: [
+              Container(
+                width: 72,
+                height: 72,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.network(
+                    sight.url,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 2,
+                right: 2,
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      favoriteSights.removeAt(index);
+                    });
+                  },
+                  child: Container(
+                    width: 20,
+                    height: 20,
+                    child: SvgPicture.asset(
+                      'res/assets/cancel_white.svg',
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    final firstItem = Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            favoriteSights.add(mocks[index]);
+            if (index < mocks.length - 1) {
+              index++;
+            } else {
+              index = 0;
+            }
+          });
+        },
+        child: Container(
+          width: 72,
+          height: 72,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: SvgPicture.asset(
+              'res/assets/add_card.svg',
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+      ),
+    );
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: MyAppBar(
@@ -212,6 +286,16 @@ class _AddSightScreenState extends State<AddSightScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      firstItem,
+                      for (int i = 0; i < favoriteSights.length; i++)
+                        previewPhoto(favoriteSights[i], i),
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: RichText(
@@ -259,7 +343,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                   child: Container(
                     width: 328,
                     height: 40,
-                    //New  sight name=============================================
                     child: fieldSightName,
                   ),
                 ),
@@ -294,7 +377,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     ),
                   ],
                 ),
-                //horizontal forms================================================
                 Row(
                   children: [
                     Container(
@@ -305,7 +387,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                             vertical: 0.0,
                             horizontal: 10,
                           ),
-                          //latitude================================================
                           child: fieldSightLat),
                     ),
                     const SizedBox(
@@ -319,7 +400,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                           vertical: 0.0,
                           horizontal: 10,
                         ),
-                        //longetude===============================================
                         child: fieldSightLon,
                       ),
                     ),
@@ -356,7 +436,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                   child: Container(
                     width: 328,
                     height: 80,
-                    //description================================================
                     child: fieldSightDescription,
                   ),
                 ),

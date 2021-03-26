@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
 import 'package:places/mocks.dart';
@@ -29,7 +30,7 @@ class _VisitingScreenState extends State<VisitingScreen>
   }
 
   List<Sight> plannedSights = [mocks[0], mocks[3], mocks[4]];
-  List<Sight> visitedSights = [mocks[1], mocks[2]];
+  List<Sight> visitedSights = [mocks[1], mocks[2], mocks[5]];
 
   Widget plannedItems(Sight sight, int index) {
     return PlannedSightCard(sight, onCancel: (index) {
@@ -44,6 +45,16 @@ class _VisitingScreenState extends State<VisitingScreen>
       setState(() {
         visitedSights.removeAt(index);
       });
+    });
+  }
+
+  void reorderData(List<Sight> list, int oldIndex, int newIndex) {
+    setState(() {
+      if (newIndex > oldIndex) {
+        newIndex -= 1;
+      }
+      final items = list.removeAt(oldIndex);
+      list.insert(newIndex, items);
     });
   }
 
@@ -139,24 +150,104 @@ class _VisitingScreenState extends State<VisitingScreen>
           controller: tabController,
           children: [
             Tab(
-              child: ListView.builder(
+              child: ReorderableListView.builder(
                 itemCount: plannedSights.length,
                 scrollDirection: Axis.vertical,
+                onReorder: (int oldIndex, int newIndex) {
+                  setState(() {
+                    if (newIndex > oldIndex) {
+                      newIndex -= 1;
+                    }
+                    final items = plannedSights.removeAt(oldIndex);
+                    plannedSights.insert(newIndex, items);
+                  });
+                },
                 itemBuilder: (context, index) {
                   return Dismissible(
-                    direction: DismissDirection.startToEnd,
-                    key: ObjectKey(PlannedSightCard),
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      margin: EdgeInsets.only(right: 10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      width: 24,
+                      height: 24,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'res/assets/bucket.svg',
+                                fit: BoxFit.scaleDown,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  style: matDismissible,
+                                  text: toDelete,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    key: ValueKey(plannedSights[index]),
                     child: plannedItems(plannedSights[index], index),
                   );
                 },
               ),
             ),
             Tab(
-              child: ListView.builder(
+              child: ReorderableListView.builder(
+                onReorder: (int oldIndex, int newIndex) {
+                  setState(() {
+                    if (newIndex > oldIndex) {
+                      newIndex -= 1;
+                    }
+                    final items = visitedSights.removeAt(oldIndex);
+                    visitedSights.insert(newIndex, items);
+                  });
+                },
+                scrollDirection: Axis.vertical,
                 itemCount: visitedSights.length,
                 itemBuilder: (context, index) {
                   return Dismissible(
-                    key: ObjectKey(VisitedSightCard),
+                    direction: DismissDirection.endToStart,
+                    background: Container(
+                      margin: EdgeInsets.only(right: 10.0),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      width: 24,
+                      height: 24,
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.all(30.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                'res/assets/bucket.svg',
+                                fit: BoxFit.scaleDown,
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  style: matDismissible,
+                                  text: toDelete,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    key: ValueKey(visitedSights[index]),
                     child: visitedItems(visitedSights[index], index),
                   );
                 },
