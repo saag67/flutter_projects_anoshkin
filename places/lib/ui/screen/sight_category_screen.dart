@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/res/colors/colors.dart';
 import 'package:places/res/const/const.dart';
@@ -51,7 +52,8 @@ class _SightCategoryScreenState extends State<SightCategoryScreen> {
       ),
       body: Stack(
         children: [
-          Column(
+          ListView(
+            scrollDirection: Axis.vertical,
             children: [
               for (int i = 0; i < listCategories.length; i++) addCategory(i)
             ],
@@ -61,7 +63,6 @@ class _SightCategoryScreenState extends State<SightCategoryScreen> {
             right: 10,
             left: 10,
             child: ElevatedButton(
-              // key: _formkey,
               onPressed: () {
                 for (int i = 0; i < listCategories.length; i++) {
                   if (checkCategory[i]) {

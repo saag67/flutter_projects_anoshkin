@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
@@ -12,8 +11,7 @@ import 'package:places/ui/screen/sight_category_screen.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
 
 class AddSightScreen extends StatefulWidget {
-  const AddSightScreen({Key key}) : super(key: key);
-
+  AddSightScreen({Key key}) : super(key: key);
   @override
   _AddSightScreenState createState() => _AddSightScreenState();
 }
@@ -46,7 +44,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
   String category;
   String currentCategory = not_selected;
   Sight newSight = Sight('', '', '', '', '', '');
-  List<Sight> favoriteSights = [];
 
   @override
   void initState() {
@@ -57,7 +54,9 @@ class _AddSightScreenState extends State<AddSightScreen> {
     sightDescription = FocusNode();
   }
 
+  List<Sight> favoriteSights = [];
   int index = 0;
+
   @override
   Widget build(BuildContext context) {
     final fieldSightName = TextFormField(
@@ -65,7 +64,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       autofocus: true,
       enabled: true,
       autovalidateMode: AutovalidateMode.disabled,
-      validator: (value) {
+      validator: (String value) {
         if (value.isEmpty) {
           return 'Please enter some text';
         }
@@ -166,7 +165,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       onFieldSubmitted: (term) {
         newSight.details = textControllerDescription.text;
         newSight.url =
-            'https://3d-maps.kz/files/308/photos/308-1513156681-0806.jpg';
+            "https://3d-maps.kz/files/308/photos/308-1513156681-0806.jpg";
         isValid = _formkey.currentState.validate();
       },
       decoration: InputDecoration(
@@ -180,8 +179,8 @@ class _AddSightScreenState extends State<AddSightScreen> {
 
     Widget previewPhoto(Sight sight, int index) {
       return Dismissible(
-        key: UniqueKey(),
         direction: DismissDirection.up,
+        key: UniqueKey(),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Stack(
@@ -216,7 +215,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                   ),
                 ),
               ),
-              //),
             ],
           ),
         ),
@@ -229,7 +227,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
         onTap: () {
           setState(() {
             favoriteSights.add(mocks[index]);
-            debugPrint("$index");
             if (index < mocks.length - 1) {
               index++;
             } else {
@@ -286,12 +283,14 @@ class _AddSightScreenState extends State<AddSightScreen> {
         key: _formkey,
         child: Stack(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            ListView(
+              scrollDirection: Axis.vertical,
+              //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
+                SizedBox(
+                  height: 90,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
                     children: [
                       firstItem,
                       for (int i = 0; i < favoriteSights.length; i++)
@@ -299,6 +298,16 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     ],
                   ),
                 ),
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: [
+                //       firstItem,
+                //       for (int i = 0; i < favoriteSights.length; i++)
+                //         previewPhoto(favoriteSights[i], i),
+                //     ],
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: RichText(
@@ -346,7 +355,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                   child: Container(
                     width: 328,
                     height: 40,
-                    //New  sight name=============================================
                     child: fieldSightName,
                   ),
                 ),
@@ -381,7 +389,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     ),
                   ],
                 ),
-                //horizontal forms================================================
                 Row(
                   children: [
                     Container(
@@ -392,7 +399,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                             vertical: 0.0,
                             horizontal: 10,
                           ),
-                          //latitude================================================
                           child: fieldSightLat),
                     ),
                     const SizedBox(
@@ -406,7 +412,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                           vertical: 0.0,
                           horizontal: 10,
                         ),
-                        //longetude===============================================
                         child: fieldSightLon,
                       ),
                     ),
@@ -443,7 +448,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                   child: Container(
                     width: 328,
                     height: 80,
-                    //description================================================
                     child: fieldSightDescription,
                   ),
                 ),
@@ -454,6 +458,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
               right: 10,
               left: 10,
               child: ElevatedButton(
+                // key: _formkey,
                 onPressed: isValid
                     ? () {
                         mocks.add(newSight);

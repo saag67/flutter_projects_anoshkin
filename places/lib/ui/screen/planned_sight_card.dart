@@ -8,10 +8,9 @@ class PlannedSightCard extends SightCard {
   final Sight sight;
   Function(int index) onCancel;
   PlannedSightCard(this.sight, {Key key, this.onCancel})
-      : super(sight, key: new ObjectKey(sight));
+      : super(sight, key: key);
 
   int get index => null ?? 0;
-
   @override
   Widget buttonBar() {
     return ButtonBar(
@@ -21,9 +20,7 @@ class PlannedSightCard extends SightCard {
             Icons.calendar_today,
             color: Colors.white,
           ),
-          onPressed: () {
-            // print("Planned");
-          },
+          onPressed: () {},
         ),
         IconButton(
           icon: Icon(
@@ -32,7 +29,6 @@ class PlannedSightCard extends SightCard {
           ),
           onPressed: () {
             onCancel(index);
-            //print("Canceled");
           },
         )
       ],
