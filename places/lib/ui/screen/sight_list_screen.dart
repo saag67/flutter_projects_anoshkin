@@ -59,13 +59,11 @@ class _SightListScreenState extends State<SightListScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            for (int i = 0; i < mocks.length; i++) SightCard(mocks[i]),
-          ],
-        ),
-      ),
+      body: ListView.builder(
+          itemCount: mocks.length,
+          itemBuilder: (context, index) {
+            return SightCard(mocks[index]);
+          }),
       floatingActionButton: GestureDetector(
         onTap: () {
           Navigator.push(

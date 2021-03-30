@@ -283,12 +283,14 @@ class _AddSightScreenState extends State<AddSightScreen> {
         key: _formkey,
         child: Stack(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            ListView(
+              scrollDirection: Axis.vertical,
+              //crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
+                SizedBox(
+                  height: 90,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
                     children: [
                       firstItem,
                       for (int i = 0; i < favoriteSights.length; i++)
@@ -296,6 +298,16 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     ],
                   ),
                 ),
+                // SingleChildScrollView(
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: [
+                //       firstItem,
+                //       for (int i = 0; i < favoriteSights.length; i++)
+                //         previewPhoto(favoriteSights[i], i),
+                //     ],
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: RichText(

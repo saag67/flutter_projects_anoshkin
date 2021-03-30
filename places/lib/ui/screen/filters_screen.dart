@@ -179,12 +179,14 @@ class _FiltersScreenState extends State<FiltersScreen> {
       ),
       body: Stack(
         children: [
-          Column(
+          ListView(
+            scrollDirection: Axis.vertical,
             children: [
               SizedBox(
                 height: 20,
               ),
               GridView.count(
+                scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 crossAxisCount: 3,
                 children: [
@@ -242,11 +244,22 @@ class _FiltersScreenState extends State<FiltersScreen> {
                   });
                 },
               ),
-              for (var name in names) name,
+              SizedBox(
+                height: 200,
+                child: ListView(scrollDirection: Axis.vertical, children: [
+                  for (var name in names)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15, bottom: 8),
+                      child: name,
+                    ),
+                ]),
+              ),
+              // for (var name in names)
+              //   name,
             ],
           ),
           Positioned(
-            bottom: 5,
+            bottom: 15,
             right: 10,
             left: 10,
             child: ElevatedButton(
