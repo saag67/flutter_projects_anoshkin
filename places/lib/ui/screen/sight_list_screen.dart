@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:places/main.dart';
 import 'package:places/mocks.dart';
@@ -60,6 +62,9 @@ class _SightListScreenState extends State<SightListScreen> {
         ),
       ),
       body: ListView.builder(
+          physics: Platform.isAndroid
+              ? ClampingScrollPhysics()
+              : BouncingScrollPhysics(),
           itemCount: mocks.length,
           itemBuilder: (context, index) {
             return SightCard(mocks[index]);

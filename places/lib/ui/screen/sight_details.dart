@@ -141,7 +141,6 @@ class _SightDetailsState extends State<SightDetails> {
             label: add_to_favourites,
           ),
         ],
-        //onTap: () {},
       ),
     );
   }

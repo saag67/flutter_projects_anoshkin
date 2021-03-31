@@ -51,3 +51,10 @@ List<bool> checkCategory = [
   category5,
   category6
 ];
+
+const String add_card = 'res/assets/add_card.svg';
+const String cancel_white = 'res/assets/cancel_white.svg';
+const String search_icon = "res/assets/search_icon.svg";
+const String filter_icon = "res/assets/filter_icon.svg";
+const String no_internet = 'res/assets/wifi_off-24px.svg';
+const String bucket = 'res/assets/bucket.svg';

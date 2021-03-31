@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
@@ -66,7 +68,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       autovalidateMode: AutovalidateMode.disabled,
       validator: (String value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return input_error;
         }
 
         return null;
@@ -93,7 +95,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       autovalidateMode: AutovalidateMode.disabled,
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return input_error;
         }
 
         return null;
@@ -124,7 +126,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       autovalidateMode: AutovalidateMode.disabled,
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return input_error;
         }
 
         return null;
@@ -154,7 +156,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       autovalidateMode: AutovalidateMode.disabled,
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return input_error;
         }
 
         return null;
@@ -209,7 +211,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     width: 20,
                     height: 20,
                     child: SvgPicture.asset(
-                      'res/assets/cancel_white.svg',
+                      cancel_white,
                       fit: BoxFit.scaleDown,
                     ),
                   ),
@@ -240,7 +242,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
             child: SvgPicture.asset(
-              'res/assets/add_card.svg',
+              add_card,
               fit: BoxFit.fill,
             ),
           ),
@@ -290,6 +292,10 @@ class _AddSightScreenState extends State<AddSightScreen> {
                 SizedBox(
                   height: 90,
                   child: ListView(
+                    physics: Platform.isAndroid
+                        ? ClampingScrollPhysics()
+                        : BouncingScrollPhysics(),
+                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     children: [
                       firstItem,
@@ -298,16 +304,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     ],
                   ),
                 ),
-                // SingleChildScrollView(
-                //   scrollDirection: Axis.horizontal,
-                //   child: Row(
-                //     children: [
-                //       firstItem,
-                //       for (int i = 0; i < favoriteSights.length; i++)
-                //         previewPhoto(favoriteSights[i], i),
-                //     ],
-                //   ),
-                // ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: RichText(
@@ -417,19 +413,22 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     ),
                   ],
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute<Widget>(
-                        builder: (context) => MapScreen(),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<Widget>(
+                          builder: (context) => MapScreen(),
+                        ),
+                      );
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        style: matMap,
+                        text: point_on_the_map,
                       ),
-                    );
-                  },
-                  child: RichText(
-                    text: TextSpan(
-                      style: matMap,
-                      text: point_on_the_map,
                     ),
                   ),
                 ),

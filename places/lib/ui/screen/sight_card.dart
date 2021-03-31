@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
@@ -37,7 +38,7 @@ class SightCard extends StatelessWidget {
           Container(
             margin: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Colors.lightBlue,
+              color: Colors.transparent,
               borderRadius: BorderRadius.circular(20),
             ),
             child: ClipRRect(

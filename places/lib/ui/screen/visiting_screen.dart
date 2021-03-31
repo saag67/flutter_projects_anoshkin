@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -5,6 +7,7 @@ import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
 import 'package:places/mocks.dart';
 import 'package:places/res/colors/colors.dart';
+import 'package:places/res/const/const.dart';
 import 'package:places/res/strings/strings.dart';
 import 'package:places/res/styles/styles.dart';
 import 'package:places/ui/screen/planned_sight_card.dart';
@@ -141,6 +144,9 @@ class _VisitingScreenState extends State<VisitingScreen>
           children: [
             Tab(
               child: ReorderableListView.builder(
+                physics: Platform.isAndroid
+                    ? ClampingScrollPhysics()
+                    : BouncingScrollPhysics(),
                 itemCount: plannedSights.length,
                 scrollDirection: Axis.vertical,
                 onReorder: (int oldIndex, int newIndex) {
@@ -176,7 +182,7 @@ class _VisitingScreenState extends State<VisitingScreen>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
-                                'res/assets/bucket.svg',
+                                bucket,
                                 fit: BoxFit.scaleDown,
                               ),
                               RichText(
@@ -198,6 +204,9 @@ class _VisitingScreenState extends State<VisitingScreen>
             ),
             Tab(
               child: ReorderableListView.builder(
+                physics: Platform.isAndroid
+                    ? ClampingScrollPhysics()
+                    : BouncingScrollPhysics(),
                 onReorder: (int oldIndex, int newIndex) {
                   setState(() {
                     if (newIndex > oldIndex) {
@@ -233,7 +242,7 @@ class _VisitingScreenState extends State<VisitingScreen>
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(
-                                'res/assets/bucket.svg',
+                                bucket,
                                 fit: BoxFit.scaleDown,
                               ),
                               RichText(
