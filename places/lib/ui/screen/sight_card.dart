@@ -29,87 +29,72 @@ class SightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width2 = MediaQuery.of(context).size.width / 2;
+    //double width2 = MediaQuery.of(context).size.width / 2;
+    Size size = MediaQuery.of(context).size;
 
-    return AspectRatio(
-      aspectRatio: 1.5,
-      child: Stack(
-        children: [
-          Container(
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.transparent,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.network(
-                sight.url,
-                loadingBuilder: (context, child, progress) {
-                  return progress == null
-                      ? child
-                      : Center(
-                          child: RefreshProgressIndicator(),
-                        );
-                },
-                fit: BoxFit.fill,
-              ),
-            ),
+    final title = RichText(
+      text: TextSpan(
+        style: TextStyle(
+          color:
+              App.isDarkTheme ? lmCardBackgroundColor : dmCardBackgroundColor,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+        text: sight.name,
+      ),
+    );
+
+    final sightType = RichText(
+      text: TextSpan(
+          style: TextStyle(
+            color: Colors.white,
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              margin:
-                  EdgeInsets.only(left: 10, top: 0.0, right: 10, bottom: 0.0),
-              decoration: BoxDecoration(
-                color: App.isDarkTheme
-                    ? dmCardBackgroundColor
-                    : lmCardBackgroundColor,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.zero,
-                  topRight: Radius.zero,
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
+          text: sight.type),
+    );
+
+    return Stack(
+      children: [
+        SafeArea(
+          child: Card(
+            color:
+                App.isDarkTheme ? dmCardBackgroundColor : lmCardBackgroundColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15)),
+                  child: Image.network(
+                    sight.url,
+                    fit: BoxFit.fitWidth,
+                    loadingBuilder: (context, child, progress) {
+                      return progress == null
+                          ? child
+                          : RefreshProgressIndicator();
+                    },
+                    height: size.height / 5,
+                    width: size.width,
+                  ),
                 ),
-              ),
-              width: 200,
-              height: 120,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 10,
+                Container(
+                  height: 100,
+                  child: ListTile(
+                    title: title,
                   ),
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    alignment: Alignment.topLeft,
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        minWidth: 50,
-                        maxWidth: width2,
-                      ),
-                      child: RichText(
-                        text: TextSpan(
-                          style: TextStyle(
-                            color: App.isDarkTheme
-                                ? lmCardBackgroundColor
-                                : dmCardBackgroundColor,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          text: sight.name,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          Material(
-            color: Colors.transparent,
+        ),
+        Material(
+          color: Colors.transparent,
+          child: SizedBox(
+            width: size.width,
+            height: size.height / 3,
             child: InkWell(
               onTap: () {
                 Navigator.push(
@@ -118,30 +103,29 @@ class SightCard extends StatelessWidget {
                     builder: (context) => SightDetails(sight),
                   ),
                 );
-                //print("Taped");
               },
             ),
           ),
-          Positioned(
-            right: 20,
-            top: 10,
-            child: buttonBar(),
-          ),
-          Positioned(
-            left: 20,
-            top: 30,
-            child: Container(
-              child: RichText(
-                text: TextSpan(
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                    text: sight.type),
-              ),
+        ),
+        Positioned(
+          right: 20,
+          top: 10,
+          child: buttonBar(),
+        ),
+        Positioned(
+          left: 20,
+          top: 30,
+          child: Container(
+            child: RichText(
+              text: TextSpan(
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                  text: sight.type),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

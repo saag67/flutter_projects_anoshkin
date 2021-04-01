@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
@@ -291,16 +289,24 @@ class _AddSightScreenState extends State<AddSightScreen> {
               children: [
                 SizedBox(
                   height: 90,
-                  child: ListView(
-                    physics: Platform.isAndroid
-                        ? ClampingScrollPhysics()
-                        : BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      firstItem,
-                      for (int i = 0; i < favoriteSights.length; i++)
-                        previewPhoto(favoriteSights[i], i),
+                      Expanded(
+                        flex: 1,
+                        child: firstItem,
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: ListView(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            for (int i = 0; i < favoriteSights.length; i++)
+                              previewPhoto(favoriteSights[i], i),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
