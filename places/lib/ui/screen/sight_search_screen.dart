@@ -5,6 +5,7 @@ import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
 import 'package:places/mocks.dart';
 import 'package:places/res/colors/colors.dart';
+import 'package:places/res/const/const.dart';
 import 'package:places/res/strings/strings.dart';
 import 'package:places/res/styles/styles.dart';
 import 'package:places/ui/screen/search_bar.dart';
@@ -239,7 +240,7 @@ class EmptyState extends StatelessWidget {
             width: 50,
             height: 50,
             child: SvgPicture.asset(
-              'res/assets/search_icon.svg',
+              search_icon,
               fit: BoxFit.fill,
             ),
           ),
@@ -284,7 +285,7 @@ class NoConnection extends StatelessWidget {
             width: 50,
             height: 50,
             child: SvgPicture.asset(
-              'res/assets/wifi_off-24px.svg',
+              no_internet,
               fit: BoxFit.fill,
             ),
           ),

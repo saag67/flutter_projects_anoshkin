@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:circular_check_box/circular_check_box.dart';
@@ -162,7 +163,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
           icon: Icon(Icons.arrow_back_ios_outlined),
         ),
         actions: [
-          FlatButton(
+          TextButton(
             onPressed: () {
               setState(() {
                 for (int i = 0; i < checkboxButtons.length; i++) clearAll(i);
@@ -186,6 +187,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 height: 20,
               ),
               GridView.count(
+                physics: Platform.isAndroid
+                    ? ClampingScrollPhysics()
+                    : BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 crossAxisCount: 3,
@@ -246,16 +250,19 @@ class _FiltersScreenState extends State<FiltersScreen> {
               ),
               SizedBox(
                 height: 200,
-                child: ListView(scrollDirection: Axis.vertical, children: [
-                  for (var name in names)
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15, bottom: 8),
-                      child: name,
-                    ),
-                ]),
+                child: ListView(
+                    physics: Platform.isAndroid
+                        ? ClampingScrollPhysics()
+                        : BouncingScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      for (var name in names)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, bottom: 8),
+                          child: name,
+                        ),
+                    ]),
               ),
-              // for (var name in names)
-              //   name,
             ],
           ),
           Positioned(

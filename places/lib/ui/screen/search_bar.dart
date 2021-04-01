@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
 import 'package:places/res/colors/colors.dart';
+import 'package:places/res/const/const.dart';
 import 'package:places/res/strings/strings.dart';
 import 'package:places/ui/screen/filters_screen.dart';
 
@@ -52,7 +53,7 @@ class _SearchBarState extends State<SearchBar> with ChangeNotifier {
               borderRadius: BorderRadius.circular(18),
             ),
             prefixIcon: SvgPicture.asset(
-              "res/assets/search_icon.svg",
+              search_icon,
               fit: BoxFit.scaleDown,
             ),
             suffixIcon: IconButton(
@@ -69,7 +70,7 @@ class _SearchBarState extends State<SearchBar> with ChangeNotifier {
                 widget.getSights(widget.sights);
               },
               icon: SvgPicture.asset(
-                "res/assets/filter_icon.svg",
+                filter_icon,
                 fit: BoxFit.scaleDown,
               ),
             ),

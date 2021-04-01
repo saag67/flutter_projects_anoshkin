@@ -21,9 +21,7 @@ class VisitedSightCard extends SightCard {
             Icons.share,
             color: Colors.white,
           ),
-          onPressed: () {
-            //print("Shared");
-          },
+          onPressed: () {},
         ),
         IconButton(
           icon: Icon(
@@ -31,7 +29,6 @@ class VisitedSightCard extends SightCard {
             color: Colors.white,
           ),
           onPressed: () {
-            //print("Canceled");
             onCancel(index);
           },
         )

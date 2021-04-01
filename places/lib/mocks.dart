@@ -56,7 +56,7 @@ List<Sight> mocks = [
       "Хачапури тетушки Марико",
       "47.09475",
       "51.88267",
-      "https://scontent-otp1-1.xx.fbcdn.net/v/t1.0-9/78609330_162730491793678_2850540730311507968_o.jpg?_nc_cat=111&ccb=3&_nc_sid=cdbe9c&_nc_ohc=Ux20bBdrRYUAX8BSUmk&_nc_ht=scontent-otp1-1.xx&oh=ce2dcb99ddc24cff945cc28b83b2efb8&oe=60641E71",
+      "https://avatars.mds.yandex.net/get-altay/2369616/2a00000173a5ea90b488c9a7ae3121e2b815/XXXL",
       "Грузинская кухня",
       "кафе"),
 ];

@@ -66,7 +66,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       autovalidateMode: AutovalidateMode.disabled,
       validator: (String value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return input_error;
         }
 
         return null;
@@ -93,7 +93,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       autovalidateMode: AutovalidateMode.disabled,
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return input_error;
         }
 
         return null;
@@ -124,7 +124,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       autovalidateMode: AutovalidateMode.disabled,
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return input_error;
         }
 
         return null;
@@ -154,7 +154,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       autovalidateMode: AutovalidateMode.disabled,
       validator: (value) {
         if (value.isEmpty) {
-          return 'Please enter some text';
+          return input_error;
         }
 
         return null;
@@ -209,7 +209,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     width: 20,
                     height: 20,
                     child: SvgPicture.asset(
-                      'res/assets/cancel_white.svg',
+                      cancel_white,
                       fit: BoxFit.scaleDown,
                     ),
                   ),
@@ -240,7 +240,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
             child: SvgPicture.asset(
-              'res/assets/add_card.svg',
+              add_card,
               fit: BoxFit.fill,
             ),
           ),
@@ -289,25 +289,27 @@ class _AddSightScreenState extends State<AddSightScreen> {
               children: [
                 SizedBox(
                   height: 90,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      firstItem,
-                      for (int i = 0; i < favoriteSights.length; i++)
-                        previewPhoto(favoriteSights[i], i),
+                      Expanded(
+                        flex: 1,
+                        child: firstItem,
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: ListView(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            for (int i = 0; i < favoriteSights.length; i++)
+                              previewPhoto(favoriteSights[i], i),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                // SingleChildScrollView(
-                //   scrollDirection: Axis.horizontal,
-                //   child: Row(
-                //     children: [
-                //       firstItem,
-                //       for (int i = 0; i < favoriteSights.length; i++)
-                //         previewPhoto(favoriteSights[i], i),
-                //     ],
-                //   ),
-                // ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: RichText(
@@ -417,19 +419,22 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     ),
                   ],
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute<Widget>(
-                        builder: (context) => MapScreen(),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<Widget>(
+                          builder: (context) => MapScreen(),
+                        ),
+                      );
+                    },
+                    child: RichText(
+                      text: TextSpan(
+                        style: matMap,
+                        text: point_on_the_map,
                       ),
-                    );
-                  },
-                  child: RichText(
-                    text: TextSpan(
-                      style: matMap,
-                      text: point_on_the_map,
                     ),
                   ),
                 ),
