@@ -79,7 +79,7 @@ class _SightSearchScreenState extends State<SightSearchScreen> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: Image.network(
-            sight.url,
+            sight.url[0],
             width: 56,
             height: 56,
             fit: BoxFit.fill,

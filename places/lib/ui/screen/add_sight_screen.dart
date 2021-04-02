@@ -43,7 +43,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
 
   String category;
   String currentCategory = not_selected;
-  Sight newSight = Sight('', '', '', '', '', '');
+  Sight newSight = Sight('', '', '', [], '', '');
 
   @override
   void initState() {
@@ -164,7 +164,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       controller: textControllerDescription,
       onFieldSubmitted: (term) {
         newSight.details = textControllerDescription.text;
-        newSight.url =
+        newSight.url[0] =
             "https://3d-maps.kz/files/308/photos/308-1513156681-0806.jpg";
         isValid = _formkey.currentState.validate();
       },
@@ -191,7 +191,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image.network(
-                    sight.url,
+                    sight.url[0],
                     fit: BoxFit.fill,
                   ),
                 ),
