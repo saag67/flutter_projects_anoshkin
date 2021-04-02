@@ -69,7 +69,7 @@ class SightCard extends StatelessWidget {
                       topLeft: Radius.circular(15),
                       topRight: Radius.circular(15)),
                   child: Image.network(
-                    sight.url,
+                    sight.url[0],
                     fit: BoxFit.fitWidth,
                     loadingBuilder: (context, child, progress) {
                       return progress == null

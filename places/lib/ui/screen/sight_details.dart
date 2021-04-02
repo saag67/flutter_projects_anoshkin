@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -17,14 +19,21 @@ class SightDetails extends StatefulWidget {
 }
 
 class _SightDetailsState extends State<SightDetails> {
-  // void _omItemTaped(int index) {
-  //   index == 0 ? print('Planned') : print('Added to Favorites');
-  // }
-
+  double left = 0.0;
+  double right = 0.0;
+  int currentPage = 0;
   @override
   Widget build(BuildContext context) {
     double height1 = MediaQuery.of(context).size.height;
     double width1 = MediaQuery.of(context).size.width;
+    Size size = MediaQuery.of(context).size;
+
+    void moveIndicator(int page) {
+      currentPage = page;
+
+      setState(() {});
+    }
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -56,20 +65,26 @@ class _SightDetailsState extends State<SightDetails> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                // width: width1,
-                //height: height1 / 2,
+                width: width1,
+                height: height1 / 2,
                 color: Colors.lightBlue,
-                child: Image.network(
-                  widget.sight.url,
-                  loadingBuilder: (context, child, progress) {
-                    return progress == null
-                        ? child
-                        : Center(
-                            child: RefreshProgressIndicator(),
-                          );
-                  },
-                  fit: BoxFit.contain,
-                ),
+                child: PageView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.sight.url.length,
+                    onPageChanged: moveIndicator,
+                    itemBuilder: (context, index) {
+                      return Image.network(
+                        widget.sight.url[index],
+                        loadingBuilder: (context, child, progress) {
+                          return progress == null
+                              ? child
+                              : Center(
+                                  child: RefreshProgressIndicator(),
+                                );
+                        },
+                        fit: BoxFit.fill,
+                      );
+                    }),
               ),
               Container(
                 padding: EdgeInsets.all(10),
@@ -104,13 +119,29 @@ class _SightDetailsState extends State<SightDetails> {
             ],
           ),
           Positioned(
+            top: size.height / 2 - 8,
+            child: Material(
+              color: Colors.transparent,
+              child: Row(
+                children: [
+                  for (int i = 0; i <= widget.sight.url.length - 1; i++)
+                    Container(
+                      height: 8,
+                      width: size.width / widget.sight.url.length,
+                      color: currentPage == i
+                          ? lmCheckBoxFill
+                          : Colors.transparent,
+                    ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
             bottom: 15,
             right: 10,
             left: 10,
             child: ElevatedButton(
-              onPressed: () {
-                //print("the route created");
-              },
+              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 primary: lmSettingScreenAppBarButton,
                 shape: RoundedRectangleBorder(

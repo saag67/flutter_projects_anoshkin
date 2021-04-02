@@ -49,3 +49,12 @@ const String search_failed = "Ничего не найдено";
 const String change_conditions = "Попробуйте изменить параметры поиска";
 const String toDelete = "Удалить";
 const String input_error = 'Please enter some text';
+const String welcome_to_guide = "Добро пожаловать\nв Путеводитель";
+const String search_new_location =
+    "Ищи новые локации и сохраняй\n самые любимые";
+const String skip = "Пропустить";
+const String create_new_route = "Построй маршрут\nи отправляйся в путь";
+const String reach_the_goal = "Достигай цели максимально\n\ быстро и комфортно";
+const String add_new_sights = "Добавляй места,\nкоторые нашел сам";
+const String share_sights =
+    "Делись самыми интересными\nи помоги нам стать лучше";
