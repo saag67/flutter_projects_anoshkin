@@ -34,7 +34,7 @@ class _SightDetailsState extends State<SightDetails> {
       setState(() {});
     }
 
-    final galerySection = Stack(
+    final Widget galerySection = Stack(
       children: [
         Container(
           width: width1,
@@ -77,7 +77,7 @@ class _SightDetailsState extends State<SightDetails> {
         ),
       ],
     );
-    final descriptionSection = Container(
+    final Widget descriptionSection = Container(
       padding: EdgeInsets.all(10),
       child: RichText(
         textAlign: TextAlign.justify,
@@ -107,7 +107,7 @@ class _SightDetailsState extends State<SightDetails> {
         ),
       ),
     );
-    final List<Widget> screenDetailsParts = [galerySection, descriptionSection];
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: SafeArea(

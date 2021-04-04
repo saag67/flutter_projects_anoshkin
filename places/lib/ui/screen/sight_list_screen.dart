@@ -41,7 +41,7 @@ class _SightListScreenState extends State<SightListScreen> {
                 ),
               ),
             ),
-            backgroundColor: Colors.white30,
+            backgroundColor: Colors.white,
             flexibleSpace: FlexibleSpaceBar(
               background: Stack(
                 children: [
