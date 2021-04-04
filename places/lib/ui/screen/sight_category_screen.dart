@@ -4,7 +4,6 @@ import 'package:places/res/colors/colors.dart';
 import 'package:places/res/const/const.dart';
 import 'package:places/res/strings/strings.dart';
 import 'package:places/res/styles/styles.dart';
-import 'package:places/ui/screen/sight_list_screen.dart';
 
 class SightCategoryScreen extends StatefulWidget {
   SightCategoryScreen({Key key}) : super(key: key);
@@ -42,7 +41,7 @@ class _SightCategoryScreenState extends State<SightCategoryScreen> {
   Widget build(BuildContext context) {
     String category;
     return Scaffold(
-      appBar: MyAppBar(
+      appBar: AppBar(
         title: RichText(
           text: TextSpan(
             style: matAddNewSightHeaderBlack,
