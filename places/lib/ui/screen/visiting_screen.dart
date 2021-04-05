@@ -58,7 +58,7 @@ class _VisitingScreenState extends State<VisitingScreen>
       initialIndex: 0,
       child: Scaffold(
         appBar: AppBar(
-          //backgroundColor: Colors.white,
+          automaticallyImplyLeading: false,
           elevation: 0,
           title: Center(
             child: RichText(

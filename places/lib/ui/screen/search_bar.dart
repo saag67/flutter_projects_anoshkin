@@ -16,7 +16,6 @@ class SearchBar extends StatefulWidget {
   Function(List<Sight>) getSights;
   List<Sight> sights = [];
 
-  //SearchBar.forsearch({this.onChange});
   @override
   _SearchBarState createState() => _SearchBarState();
 }
@@ -26,8 +25,8 @@ class _SearchBarState extends State<SearchBar> with ChangeNotifier {
 
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
+    controller.dispose();
   }
 
   @override

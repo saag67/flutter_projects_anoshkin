@@ -22,49 +22,57 @@ class _SightListScreenState extends State<SightListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        toolbarHeight: 120,
-        flexibleSpace: SafeArea(
-          child: Container(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            expandedHeight: 150,
+            pinned: true,
+            floating: true,
+            snap: true,
+            title: Center(
+              child: RichText(
+                text: TextSpan(
+                  text: list_of_interesting_sights,
+                  style: App.isDarkTheme
+                      ? matAddNewSightHeader
+                      : matAddNewSightHeaderBlack,
                 ),
-                RichText(
-                  text: TextSpan(
-                    text: list_of_interesting_sights,
-                    style: App.isDarkTheme
-                        ? matAddNewSightHeader
-                        : matAddNewSightHeaderBlack,
+              ),
+            ),
+            backgroundColor: Colors.white,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Stack(
+                children: [
+                  Positioned(
+                    top: 80,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute<Widget>(
+                            builder: (context) => SightSearchScreen(),
+                          ),
+                        );
+                      },
+                      child: SearchBar(enabled),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute<Widget>(
-                        builder: (context) => SightSearchScreen(),
-                      ),
-                    );
-                  },
-                  child: SearchBar(enabled),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return SightCard(mocks[index]);
+              },
+              childCount: mocks.length,
+            ),
+          ),
+        ],
       ),
-      body: ListView.builder(
-          itemCount: mocks.length,
-          itemBuilder: (context, index) {
-            return SightCard(mocks[index]);
-          }),
       floatingActionButton: GestureDetector(
         onTap: () {
           Navigator.push(
@@ -113,11 +121,13 @@ class _SightListScreenState extends State<SightListScreen> {
 }
 
 ///класс кастомного виджета, наследника PreferredSize
+
 class MyAppBar extends PreferredSize {
   MyAppBar({
     Key key,
     Widget leading,
     Widget title,
+    Widget child,
     Color color,
     int elevation,
     bool automaticallyImplyLeading,
