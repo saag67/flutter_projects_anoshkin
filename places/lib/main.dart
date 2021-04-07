@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/res/screens/themes.dart';
-import 'package:places/ui/screen/slash_screen.dart';
+import 'package:places/ui/screen/splash_screen.dart';
 
 void main() {
   runApp(App());
