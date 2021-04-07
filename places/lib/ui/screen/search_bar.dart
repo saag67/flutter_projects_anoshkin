@@ -25,8 +25,8 @@ class _SearchBarState extends State<SearchBar> with ChangeNotifier {
 
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
+    super.dispose();
   }
 
   @override

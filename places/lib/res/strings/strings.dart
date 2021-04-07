@@ -58,3 +58,4 @@ const String reach_the_goal = "Достигай цели максимально\
 const String add_new_sights = "Добавляй места,\nкоторые нашел сам";
 const String share_sights =
     "Делись самыми интересными\nи помоги нам стать лучше";
+const String go_to_next_screen = "Переход на следующий экран";
