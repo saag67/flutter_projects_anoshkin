@@ -1,6 +1,6 @@
 import 'dart:async';
+import 'dart:isolate';
 
-import 'package:computer/computer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/res/colors/colors.dart';
@@ -13,6 +13,11 @@ class SplashScreen extends StatefulWidget {
   SplashScreen({Key key}) : super(key: key);
 
   Future isInitialized;
+  static void reverseString(int number) {
+    Stopwatch stopwatch = new Stopwatch()..start();
+    var res = loremIpsum.split('').reversed.join();
+    debugPrint("reversePrintIsolate() executed in ${stopwatch.elapsed}");
+  }
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -43,22 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
     debugPrint("reversePrintAsync() executed in ${stopwatch.elapsed}");
   }
 
-  void reverseString() {
-    Stopwatch stopwatch = new Stopwatch()..start();
-    var res = loremIpsum.split('').reversed.join();
-
-    debugPrint("reversePrintIsolate() executed in ${stopwatch.elapsed}");
-  }
-
   void reversePrintIsolate() async {
-    final computer = Computer();
-    await computer.turnOn(
-      workersCount: 4,
-    );
-    final Future<String> result =
-        await computer.compute(reverseString, param: 45);
-    debugPrint(result.toString());
-    await computer.turnOff();
+    Isolate isolate = await Isolate.spawn(SplashScreen.reverseString, 0);
   }
 
   @override
@@ -66,6 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     reversePrint();
+
     reversePrintAsync();
     reversePrintIsolate();
 
