@@ -1,12 +1,11 @@
 import 'dart:async';
-import 'dart:isolate';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/res/colors/colors.dart';
 import 'package:places/res/const/const.dart';
 import 'package:places/res/strings/strings.dart';
-import 'package:places/ui/screen/sight_list_screen.dart';
+import 'package:places/ui/screen/onboarding_screen.dart';
 
 ///класс заставки при запуске программы
 class SplashScreen extends StatefulWidget {
@@ -30,36 +29,14 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.push(
       context,
       MaterialPageRoute<Widget>(
-        builder: (context) => SightListScreen(),
+        builder: (context) => OnBoardingScreen(),
       ),
     );
-  }
-
-  void reversePrint() {
-    Stopwatch stopwatch = new Stopwatch()..start();
-    var res = loremIpsum.split('').reversed.join();
-
-    debugPrint("reversePrint() executed in ${stopwatch.elapsed}");
-  }
-
-  void reversePrintAsync() async {
-    Stopwatch stopwatch = new Stopwatch()..start();
-    var res = await loremIpsum.split('').reversed.join();
-    debugPrint("reversePrintAsync() executed in ${stopwatch.elapsed}");
-  }
-
-  void reversePrintIsolate() async {
-    Isolate isolate = await Isolate.spawn(SplashScreen.reverseString, 0);
   }
 
   @override
   void initState() {
     super.initState();
-
-    reversePrint();
-
-    reversePrintAsync();
-    reversePrintIsolate();
 
     Future.delayed(
       Duration(seconds: 2),
