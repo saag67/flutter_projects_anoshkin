@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
@@ -24,7 +25,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
   FocusNode createSight;
   final _formkey = GlobalKey<FormState>();
 
-  bool isValid = false;
+  bool isValid = true;
 
   @override
   void dispose() {
@@ -57,6 +58,86 @@ class _AddSightScreenState extends State<AddSightScreen> {
 
   List<Sight> favoriteSights = [];
   int index = 0;
+
+  void _showDialog() {
+    final action = CupertinoActionSheet(
+      actions: [
+        CupertinoActionSheetAction(
+          onPressed: () {},
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                camera_action_sheet,
+                fit: BoxFit.scaleDown,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: RichText(
+                  text: TextSpan(
+                    style: matSettingsScreenAppBarBlack,
+                    text: camera,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        CupertinoActionSheetAction(
+          onPressed: () {},
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                photo_action_sheet,
+                fit: BoxFit.scaleDown,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: RichText(
+                  text: TextSpan(
+                    style: matSettingsScreenAppBarBlack,
+                    text: photo,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        CupertinoActionSheetAction(
+          onPressed: () {},
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                file_action_sheet,
+                fit: BoxFit.scaleDown,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: RichText(
+                  text: TextSpan(
+                    style: matSettingsScreenAppBarBlack,
+                    text: file,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+      cancelButton: CupertinoActionSheetAction(
+        child: RichText(
+          text: TextSpan(
+            style: matSubtitleShowGreen,
+            text: cancel,
+          ),
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+    showCupertinoModalPopup<Widget>(
+        context: context, builder: (context) => action);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +249,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
         newSight.url[0] =
             "https://3d-maps.kz/files/308/photos/308-1513156681-0806.jpg";
         newSight.id = id++;
-        isValid = _formkey.currentState.validate();
+        isValid = true; //_formkey.currentState.validate();
       },
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
@@ -228,12 +309,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            favoriteSights.add(mocks[index]);
-            if (index < mocks.length - 1) {
-              index++;
-            } else {
-              index = 0;
-            }
+            _showDialog();
           });
         },
         child: Container(
@@ -468,7 +544,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                 onPressed: isValid
                     ? () {
                         mocks.add(newSight);
-
                         Navigator.pop(context);
                       }
                     : null,
