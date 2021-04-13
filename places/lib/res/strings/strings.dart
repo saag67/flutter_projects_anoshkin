@@ -59,3 +59,9 @@ const String add_new_sights = "Добавляй места,\nкоторые на
 const String share_sights =
     "Делись самыми интересными\nи помоги нам стать лучше";
 const String go_to_next_screen = "Переход на следующий экран";
+const String i_understand = "Понятно";
+const String how_navigate =
+    "Как посмотреть\nпосещенные места и\nподелиться ими с\nдрузьями";
+const String map = "карта";
+const String list = "список";
+const String places = "места";

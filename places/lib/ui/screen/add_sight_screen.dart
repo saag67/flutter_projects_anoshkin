@@ -43,7 +43,8 @@ class _AddSightScreenState extends State<AddSightScreen> {
 
   String category;
   String currentCategory = not_selected;
-  Sight newSight = Sight('', '', '', [], '', '');
+  int id = 8;
+  Sight newSight = Sight(8, '', '', '', [], '', '');
 
   @override
   void initState() {
@@ -166,6 +167,7 @@ class _AddSightScreenState extends State<AddSightScreen> {
         newSight.details = textControllerDescription.text;
         newSight.url[0] =
             "https://3d-maps.kz/files/308/photos/308-1513156681-0806.jpg";
+        newSight.id = id++;
         isValid = _formkey.currentState.validate();
       },
       decoration: InputDecoration(
@@ -463,7 +465,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
               right: 10,
               left: 10,
               child: ElevatedButton(
-                // key: _formkey,
                 onPressed: isValid
                     ? () {
                         mocks.add(newSight);

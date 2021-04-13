@@ -189,7 +189,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           child: Column(
             children: [
               SizedBox(
-                height: size.height / 2.6,
+                height: size.height / 3.25,
               ),
               Container(
                 width: 80,

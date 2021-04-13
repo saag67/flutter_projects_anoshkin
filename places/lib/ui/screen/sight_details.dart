@@ -22,6 +22,7 @@ class _SightDetailsState extends State<SightDetails> {
   double left = 0.0;
   double right = 0.0;
   int currentPage = 0;
+  int _id = 0;
   @override
   Widget build(BuildContext context) {
     double height1 = MediaQuery.of(context).size.height;
@@ -100,7 +101,7 @@ class _SightDetailsState extends State<SightDetails> {
               text: " \n",
             ),
             TextSpan(
-              text: "${widget.sight.details}",
+              text: "ID: ${widget.sight.id} ${widget.sight.details}",
               style: matSubtitle2light,
             ),
           ],

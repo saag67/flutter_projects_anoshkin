@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places/res/strings/strings.dart';
 import 'package:places/ui/screen/map_screen.dart';
 import 'package:places/ui/screen/settings_screen.dart';
 import 'package:places/ui/screen/sight_list_screen.dart';
@@ -50,19 +51,19 @@ class _HomePageState extends State<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.list),
-            label: '',
+            label: list,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map_outlined),
-            label: '',
+            label: map,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
-            label: '',
+            label: places,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: '',
+            label: settings,
           ),
         ],
       ),

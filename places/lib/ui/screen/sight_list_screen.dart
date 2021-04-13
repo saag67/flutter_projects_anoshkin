@@ -27,7 +27,7 @@ class _SightListScreenState extends State<SightListScreen> {
           SliverAppBar(
             elevation: 0,
             automaticallyImplyLeading: false,
-            expandedHeight: 150,
+            expandedHeight: 80,
             pinned: true,
             floating: true,
             snap: true,
@@ -46,7 +46,7 @@ class _SightListScreenState extends State<SightListScreen> {
               background: Stack(
                 children: [
                   Positioned(
-                    top: 80,
+                    top: 100,
                     child: InkWell(
                       onTap: () {
                         Navigator.push(
