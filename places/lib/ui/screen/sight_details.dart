@@ -3,9 +3,11 @@ import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
 import 'package:places/res/colors/colors.dart';
+import 'package:places/res/const/const.dart';
 import 'package:places/res/strings/strings.dart';
 import 'package:places/res/styles/styles.dart';
 
@@ -40,22 +42,35 @@ class _SightDetailsState extends State<SightDetails> {
         Container(
           width: width1,
           height: height1 / 2,
-          color: Colors.lightBlue,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(20),
+              topLeft: Radius.circular(20),
+            ),
+            color: Colors.white,
+          ),
+          //color: Colors.transparent,
           child: PageView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: widget.sight.url.length,
               onPageChanged: moveIndicator,
               itemBuilder: (context, index) {
-                return Image.network(
-                  widget.sight.url[index],
-                  loadingBuilder: (context, child, progress) {
-                    return progress == null
-                        ? child
-                        : Center(
-                            child: RefreshProgressIndicator(),
-                          );
-                  },
-                  fit: BoxFit.cover,
+                return ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  child: Image.network(
+                    widget.sight.url[index],
+                    loadingBuilder: (context, child, progress) {
+                      return progress == null
+                          ? child
+                          : Center(
+                              child: RefreshProgressIndicator(),
+                            );
+                    },
+                    fit: BoxFit.cover,
+                  ),
                 );
               }),
         ),
@@ -79,6 +94,7 @@ class _SightDetailsState extends State<SightDetails> {
       ],
     );
     final Widget descriptionSection = Container(
+      color: Colors.white,
       padding: EdgeInsets.all(10),
       child: RichText(
         textAlign: TextAlign.justify,
@@ -110,17 +126,16 @@ class _SightDetailsState extends State<SightDetails> {
     );
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
       body: SafeArea(
         child: Stack(
           children: [
             CustomScrollView(
               slivers: [
-                SliverAppBar(
-                  automaticallyImplyLeading: false,
-                  expandedHeight: size.height / 2,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: galerySection,
+                SliverList(
+                  delegate: SliverChildListDelegate(
+                    [galerySection],
                   ),
                 ),
                 SliverList(
@@ -155,26 +170,30 @@ class _SightDetailsState extends State<SightDetails> {
             ),
             Positioned(
               top: 20,
-              left: 20,
+              right: 20,
               child: IconButton(
                 icon: InkWell(
                   onTap: () {
                     Navigator.pop(context);
-                    //print("Go back");
                   },
                   child: Container(
                     width: 30,
                     height: 30,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
                     ),
-                    child: Icon(Icons.arrow_back_ios_outlined),
+                    child: Icon(Icons.clear),
                   ),
                 ),
                 onPressed: () {},
                 color: Colors.black,
               ),
+            ),
+            Positioned(
+              top: 10,
+              left: size.width / 2 - 20,
+              child: SvgPicture.asset(btm_sheet_rect),
             ),
           ],
         ),

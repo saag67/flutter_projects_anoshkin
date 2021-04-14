@@ -51,6 +51,12 @@ TextStyle matSubtitleShow = _text.copyWith(
   fontSize: 14,
 );
 
+TextStyle matSubtitleShowGreen = _text.copyWith(
+  fontWeight: FontWeight.w700,
+  fontSize: 14,
+  color: lmSettingScreenAppBarButton,
+);
+
 TextStyle matSubtitle2light = _text.copyWith(
   fontWeight: FontWeight.w400,
   fontSize: 14,

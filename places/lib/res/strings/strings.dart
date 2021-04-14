@@ -65,3 +65,6 @@ const String how_navigate =
 const String map = "карта";
 const String list = "список";
 const String places = "места";
+const String camera = "Камера";
+const String photo = "Фото";
+const String file = "Файл";

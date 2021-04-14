@@ -19,9 +19,7 @@ class SightCard extends StatelessWidget {
             Icons.favorite_border,
             color: Colors.white,
           ),
-          onPressed: () {
-            //print("Added to Favorites");
-          },
+          onPressed: () {},
         )
       ],
     );
@@ -29,7 +27,6 @@ class SightCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //double width2 = MediaQuery.of(context).size.width / 2;
     Size size = MediaQuery.of(context).size;
 
     final title = RichText(
@@ -97,11 +94,16 @@ class SightCard extends StatelessWidget {
             height: size.height / 3,
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<Widget>(
-                    builder: (context) => SightDetails(sight),
-                  ),
+                showModalBottomSheet<Widget>(
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (context) => DraggableScrollableSheet(
+                      initialChildSize: 0.8,
+                      minChildSize: 0.25,
+                      maxChildSize: 0.8,
+                      builder: (context, scrollController) {
+                        return SightDetails(sight);
+                      }),
                 );
               },
             ),
