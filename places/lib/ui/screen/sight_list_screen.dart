@@ -27,7 +27,7 @@ class _SightListScreenState extends State<SightListScreen> {
           SliverAppBar(
             elevation: 0,
             automaticallyImplyLeading: false,
-            expandedHeight: 150,
+            expandedHeight: 80,
             pinned: true,
             floating: true,
             snap: true,

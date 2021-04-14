@@ -17,6 +17,7 @@ final lightTheme = ThemeData(
     thumbColor: lmPrimaryColorDark,
     inactiveTrackColor: lmSettingsScreenBodyCategory,
   ),
+  bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.transparent),
 );
 final darkTheme = ThemeData(
   primaryColor: dmPrimaryColor,

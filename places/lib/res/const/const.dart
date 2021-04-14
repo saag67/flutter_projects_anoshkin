@@ -66,6 +66,7 @@ const String current_page_indicator = 'res/assets/current_page_indicator.svg';
 const String camera_action_sheet = 'res/assets/camera.svg';
 const String photo_action_sheet = 'res/assets/photo.svg';
 const String file_action_sheet = 'res/assets/file.svg';
+const String btm_sheet_rect = 'res/assets/bottom_sheet_rect.svg';
 
 const String loremIpsum = """
   Lorem ipsum dolor sit amet, agam mucius vis an, porro possit forensibus te vis. In per labores maiorum, qui ad simul consulatu voluptaria. Id duo dolorem laboramus, usu ne dicat aliquam. Has dolorem phaedrum cu, at possit veritus disputando vix. Vix erant accommodare eu. Graeci luptatum cu cum.
