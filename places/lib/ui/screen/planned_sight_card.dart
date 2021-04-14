@@ -6,13 +6,15 @@ import 'package:places/ui/screen/sight_card.dart';
 
 class PlannedSightCard extends SightCard {
   final Sight sight;
+
   Function(int index) onCancel;
   PlannedSightCard(this.sight, {Key key, this.onCancel})
       : super(sight, key: key);
 
   int get index => null ?? 0;
+
   @override
-  Widget buttonBar() {
+  Widget buttonBar(BuildContext context) {
     return ButtonBar(
       children: [
         IconButton(
@@ -20,7 +22,12 @@ class PlannedSightCard extends SightCard {
             Icons.calendar_today,
             color: Colors.white,
           ),
-          onPressed: () {},
+          onPressed: () async {
+            var res = await showTimePicker(
+              context: context,
+              initialTime: TimeOfDay.now(),
+            );
+          },
         ),
         IconButton(
           icon: Icon(

@@ -11,7 +11,7 @@ class SightCard extends StatelessWidget {
 
   SightCard(this.sight, {Key key}) : super(key: key);
 
-  Widget buttonBar() {
+  Widget buttonBar(BuildContext context) {
     return ButtonBar(
       children: [
         IconButton(
@@ -112,7 +112,7 @@ class SightCard extends StatelessWidget {
         Positioned(
           right: 20,
           top: 10,
-          child: buttonBar(),
+          child: buttonBar(context),
         ),
         Positioned(
           left: 20,

@@ -13,7 +13,7 @@ class VisitedSightCard extends SightCard {
   int get index => null ?? 0;
 
   @override
-  Widget buttonBar() {
+  Widget buttonBar(BuildContext context) {
     return ButtonBar(
       children: [
         IconButton(
