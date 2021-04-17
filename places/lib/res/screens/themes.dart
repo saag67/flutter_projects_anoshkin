@@ -18,6 +18,17 @@ final lightTheme = ThemeData(
     inactiveTrackColor: lmSettingsScreenBodyCategory,
   ),
   bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.transparent),
+  //timePickerTheme: TimePickerThemeData(
+  //dayPeriodColor: Colors.lightGreenAccent,
+  // dayPeriodShape: RoundedRectangleBorder(
+  //   borderRadius: BorderRadius.circular(4),
+  // ),
+  // dayPeriodTextColor: lmSettingScreenAppBarButton,
+  // dialHandColor: lmSettingScreenAppBarButton,
+  // dialBackgroundColor: lmPrimaryColorDark,
+  // hourMinuteColor: Colors.lightGreenAccent,
+  // hourMinuteTextColor: lmPrimaryColor,
+  //    ),
 );
 final darkTheme = ThemeData(
   primaryColor: dmPrimaryColor,
@@ -28,6 +39,10 @@ final darkTheme = ThemeData(
     selectedItemColor: dmBottomBarSelectedColor,
     unselectedItemColor: dmBottomBarUnselectedColor,
   ),
+  // timePickerTheme: TimePickerThemeData(
+  //   backgroundColor: dmPrimaryColor,
+  //   dialBackgroundColor: dmPrimaryColorLight,
+  // ),
   textTheme: TextTheme(
       headline6: matHeadline6,
       headline5: matHeadline5,

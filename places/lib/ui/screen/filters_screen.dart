@@ -152,6 +152,22 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final _buildLayout = GridView.count(
+      physics: Platform.isAndroid
+          ? ClampingScrollPhysics()
+          : BouncingScrollPhysics(),
+      scrollDirection:
+          MediaQuery.of(context).orientation == Orientation.portrait
+              ? Axis.vertical
+              : Axis.horizontal,
+      shrinkWrap: true,
+      crossAxisCount:
+          MediaQuery.of(context).orientation == Orientation.portrait ? 3 : 1,
+      children: [
+        for (int i = 0; i < checkboxButtons.length; i++) addFilter(i),
+      ],
+    );
+
     double width1 = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -186,17 +202,11 @@ class _FiltersScreenState extends State<FiltersScreen> {
               SizedBox(
                 height: 20,
               ),
-              GridView.count(
-                physics: Platform.isAndroid
-                    ? ClampingScrollPhysics()
-                    : BouncingScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                children: [
-                  for (int i = 0; i < checkboxButtons.length; i++) addFilter(i),
-                ],
-              ),
+              ConstrainedBox(
+                  constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width - 40,
+                      maxHeight: MediaQuery.of(context).size.height / 3),
+                  child: _buildLayout),
               SizedBox(
                 height: 20,
               ),

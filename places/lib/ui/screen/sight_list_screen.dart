@@ -19,59 +19,121 @@ class SightListScreen extends StatefulWidget {
 ///класс состояния экрана списка интересных мест
 class _SightListScreenState extends State<SightListScreen> {
   bool enabled = false;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            expandedHeight: 80,
-            pinned: true,
-            floating: true,
-            snap: true,
-            title: Center(
-              child: RichText(
-                text: TextSpan(
-                  text: list_of_interesting_sights,
-                  style: App.isDarkTheme
-                      ? matAddNewSightHeader
-                      : matAddNewSightHeaderBlack,
-                ),
+    final _buildVerticalLayout = CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          expandedHeight: 120,
+          pinned: true,
+          floating: true,
+          snap: true,
+          title: Center(
+            child: RichText(
+              text: TextSpan(
+                text: list_of_interesting_sights,
+                style: App.isDarkTheme
+                    ? matAddNewSightHeader
+                    : matAddNewSightHeaderBlack,
               ),
             ),
-            backgroundColor: Colors.white,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Stack(
-                children: [
-                  Positioned(
-                    top: 100,
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute<Widget>(
-                            builder: (context) => SightSearchScreen(),
-                          ),
-                        );
-                      },
-                      child: SearchBar(enabled),
-                    ),
+          ),
+          backgroundColor: Colors.white,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Stack(
+              children: [
+                Positioned(
+                  top: 100,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<Widget>(
+                          builder: (context) => SightSearchScreen(),
+                        ),
+                      );
+                    },
+                    child: SearchBar(enabled),
                   ),
-                ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return SightCard(mocks[index]);
+            },
+            childCount: mocks.length,
+          ),
+        ),
+      ],
+    );
+    final _buildHorizontalLayout = CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          expandedHeight: 120,
+          pinned: true,
+          floating: true,
+          snap: true,
+          title: Center(
+            child: RichText(
+              text: TextSpan(
+                text: list_of_interesting_sights,
+                style: App.isDarkTheme
+                    ? matAddNewSightHeader
+                    : matAddNewSightHeaderBlack,
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return SightCard(mocks[index]);
-              },
-              childCount: mocks.length,
+          backgroundColor: Colors.white,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Stack(
+              children: [
+                Positioned(
+                  top: 100,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<Widget>(
+                          builder: (context) => SightSearchScreen(),
+                        ),
+                      );
+                    },
+                    child: SearchBar(enabled),
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
+        SliverGrid(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return SightCard(mocks[index]);
+            },
+            childCount: mocks.length,
+          ),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
+        ),
+      ],
+    );
+    return Scaffold(
+      body: OrientationBuilder(
+        builder: (context, Orientation orientation) {
+          return orientation == Orientation.portrait
+              ? _buildVerticalLayout
+              : _buildHorizontalLayout;
+        },
       ),
       floatingActionButton: GestureDetector(
         onTap: () {
