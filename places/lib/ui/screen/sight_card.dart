@@ -52,38 +52,43 @@ class SightCard extends StatelessWidget {
     return Stack(
       children: [
         SafeArea(
-          child: Card(
-            color:
-                App.isDarkTheme ? dmCardBackgroundColor : lmCardBackgroundColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15)),
-                  child: Image.network(
-                    sight.url[0],
-                    fit: BoxFit.fitWidth,
-                    loadingBuilder: (context, child, progress) {
-                      return progress == null
-                          ? child
-                          : RefreshProgressIndicator();
-                    },
-                    height: size.height / 5,
-                    width: size.width,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 0,
+              color: App.isDarkTheme
+                  ? dmCardBackgroundColor
+                  : lmCardBackgroundColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15)),
+                    child: Image.network(
+                      sight.url[0],
+                      fit: BoxFit.fitWidth,
+                      loadingBuilder: (context, child, progress) {
+                        return progress == null
+                            ? child
+                            : RefreshProgressIndicator();
+                      },
+                      height: 120,
+                      width: size.width,
+                    ),
                   ),
-                ),
-                Container(
-                  height: 100,
-                  child: ListTile(
-                    title: title,
+                  Container(
+                    height: 120,
+                    child: ListTile(
+                      title: title,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -110,13 +115,13 @@ class SightCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          right: 20,
-          top: 10,
+          right: 10,
+          top: 30,
           child: buttonBar(context),
         ),
         Positioned(
-          left: 20,
-          top: 30,
+          left: 30,
+          top: 50,
           child: Container(
             child: RichText(
               text: TextSpan(

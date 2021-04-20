@@ -68,3 +68,4 @@ const String places = "места";
 const String camera = "Камера";
 const String photo = "Фото";
 const String file = "Файл";
+const String select = "Выбрать";
