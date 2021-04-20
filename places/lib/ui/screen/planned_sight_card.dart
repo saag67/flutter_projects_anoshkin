@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/main.dart';
 import 'package:places/res/colors/colors.dart';
-import 'package:places/res/strings/strings.dart';
-import 'package:places/res/styles/styles.dart';
 import 'package:places/ui/screen/sight_card.dart';
 
 ///класс виджета-карточки планируемых к посещению мест
@@ -49,19 +47,6 @@ class PlannedSightCard extends SightCard {
                                   dateTime = newDateTime;
                                 }),
                             height: 280,
-                          ),
-                          Container(
-                            child: TextButton(
-                              child: RichText(
-                                text: TextSpan(
-                                  style: matSubtitle2,
-                                  text: select,
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                            ),
                           ),
                         ],
                       ),

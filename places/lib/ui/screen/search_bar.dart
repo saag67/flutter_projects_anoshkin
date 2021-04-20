@@ -31,11 +31,12 @@ class _SearchBarState extends State<SearchBar> with ChangeNotifier {
 
   @override
   Widget build(BuildContext context) {
-    double width1 = MediaQuery.of(context).size.width * 0.95;
+    double width1 = MediaQuery.of(context).size.width;
 
     return Container(
       width: width1,
-      child: Center(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
         child: TextField(
           onSubmitted: (String text) {
             widget.onChange(controller.text);
@@ -45,7 +46,7 @@ class _SearchBarState extends State<SearchBar> with ChangeNotifier {
           enabled: this.widget.enabled,
           textInputAction: TextInputAction.search,
           decoration: InputDecoration(
-            fillColor: App.isDarkTheme ? dmSecondaryBlack : lmPrimaryColor,
+            fillColor: App.isDarkTheme ? dmSecondaryBlack : lmPrimaryColorDark,
             filled: true,
             hintText: search,
             enabledBorder: OutlineInputBorder(

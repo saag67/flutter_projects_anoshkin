@@ -152,156 +152,158 @@ class _FiltersScreenState extends State<FiltersScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _buildLayout = GridView.count(
-      physics: Platform.isAndroid
-          ? ClampingScrollPhysics()
-          : BouncingScrollPhysics(),
-      scrollDirection:
-          MediaQuery.of(context).orientation == Orientation.portrait
-              ? Axis.vertical
-              : Axis.horizontal,
-      shrinkWrap: true,
-      crossAxisCount:
-          MediaQuery.of(context).orientation == Orientation.portrait ? 3 : 1,
-      children: [
-        for (int i = 0; i < checkboxButtons.length; i++) addFilter(i),
-      ],
-    );
-
     double width1 = MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context, mySights);
-          },
-          icon: Icon(Icons.arrow_back_ios_outlined),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              setState(() {
-                for (int i = 0; i < checkboxButtons.length; i++) clearAll(i);
-              });
-            },
-            child: RichText(
-              text: TextSpan(
-                style: matSettingsScreenAppBarGreen,
-                text: clear_all,
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: Stack(
-        children: [
-          ListView(
-            scrollDirection: Axis.vertical,
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              ConstrainedBox(
-                  constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width - 40,
-                      maxHeight: MediaQuery.of(context).size.height / 3),
-                  child: _buildLayout),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                        style: App.isDarkTheme
-                            ? matSettingsScreenBody
-                            : matSettingsScreenBodyBlack,
-                        text: distance,
-                      ),
-                    ),
-                    Spacer(),
-                    RichText(
-                      text: TextSpan(
-                        style: App.isDarkTheme
-                            ? matSettingsScreenBody
-                            : matSettingsScreenBodyBlack,
-                        text: "От ${start} до ${end} км.",
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              RangeSlider(
-                values: values,
-                divisions: 10,
-                min: 100,
-                max: 10000,
-                onChanged: (RangeValues currentValue) {
-                  setState(() {
-                    values = currentValue;
-                  });
-                },
-                onChangeStart: (RangeValues startData) {
-                  setState(() {
-                    start = values.start.roundToDouble() / 1000;
-                  });
-                },
-                onChangeEnd: (RangeValues endData) {
-                  setState(() {
-                    end = values.end.roundToDouble() / 1000;
-
-                    names.clear();
-                    getCoords(sight, start, end);
-                  });
-                },
-              ),
-              SizedBox(
-                height: 200,
-                child: ListView(
-                    physics: Platform.isAndroid
-                        ? ClampingScrollPhysics()
-                        : BouncingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    children: [
-                      for (var name in names)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15, bottom: 8),
-                          child: name,
-                        ),
-                    ]),
-              ),
-            ],
-          ),
-          Positioned(
-            bottom: 15,
-            right: 10,
-            left: 10,
-            child: ElevatedButton(
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            leading: IconButton(
               onPressed: () {
                 Navigator.pop(context, mySights);
               },
-              style: ElevatedButton.styleFrom(
-                primary: lmSettingScreenAppBarButton,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
+              icon: Icon(Icons.arrow_back_ios_outlined),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    for (int i = 0; i < checkboxButtons.length; i++)
+                      clearAll(i);
+                  });
+                },
                 child: RichText(
                   text: TextSpan(
-                    style: matSubtitleShow,
-                    text: show,
+                    style: matSettingsScreenAppBarGreen,
+                    text: clear_all,
                   ),
                 ),
               ),
-            ),
+            ],
           ),
-        ],
-      ),
+          body: Stack(
+            children: [
+              ListView(
+                scrollDirection: Axis.vertical,
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width - 40,
+                        maxHeight: MediaQuery.of(context).size.height / 3),
+                    child: GridView.count(
+                      scrollDirection: orientation == Orientation.portrait
+                          ? Axis.vertical
+                          : Axis.horizontal,
+                      shrinkWrap: true,
+                      crossAxisCount:
+                          orientation == Orientation.portrait ? 3 : 1,
+                      children: [
+                        for (int i = 0; i < checkboxButtons.length; i++)
+                          addFilter(i),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Row(
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            style: App.isDarkTheme
+                                ? matSettingsScreenBody
+                                : matSettingsScreenBodyBlack,
+                            text: distance,
+                          ),
+                        ),
+                        Spacer(),
+                        RichText(
+                          text: TextSpan(
+                            style: App.isDarkTheme
+                                ? matSettingsScreenBody
+                                : matSettingsScreenBodyBlack,
+                            text: "От ${start} до ${end} км.",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  RangeSlider(
+                    values: values,
+                    divisions: 10,
+                    min: 100,
+                    max: 10000,
+                    onChanged: (RangeValues currentValue) {
+                      setState(() {
+                        values = currentValue;
+                      });
+                    },
+                    onChangeStart: (RangeValues startData) {
+                      setState(() {
+                        start = values.start.roundToDouble() / 1000;
+                      });
+                    },
+                    onChangeEnd: (RangeValues endData) {
+                      setState(() {
+                        end = values.end.roundToDouble() / 1000;
+
+                        names.clear();
+                        getCoords(sight, start, end);
+                      });
+                    },
+                  ),
+                  SizedBox(
+                    height: 200,
+                    child: ListView(
+                        physics: Platform.isAndroid
+                            ? ClampingScrollPhysics()
+                            : BouncingScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          for (var name in names)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 15, bottom: 8),
+                              child: name,
+                            ),
+                        ]),
+                  ),
+                ],
+              ),
+              Positioned(
+                bottom: 15,
+                right: 10,
+                left: 10,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context, mySights);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: lmSettingScreenAppBarButton,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: RichText(
+                      text: TextSpan(
+                        style: matSubtitleShow,
+                        text: show,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
